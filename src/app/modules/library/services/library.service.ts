@@ -8,7 +8,6 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class LibraryService {
-
   private _books: Array<IBook> = [];
 
   constructor(
@@ -24,18 +23,18 @@ export class LibraryService {
   public getBook(id: number): void {
     this._httpService.get<IBook>(`${environment.backendUri}/book/${id}`).subscribe((book: IBook) => {
       // Do things with a book
+      console.log(book);
     });
   }
 
   public getIcon(icon_string?: string): SafeResourceUrl | string {
-    if (!!icon_string) {
+    if (icon_string) {
       return this._sanitizer.bypassSecurityTrustResourceUrl(`data:image/jpg;base64,${icon_string}`);
     }
     return 'assets/missing_icon.jpg';
   }
 
-  public get books() : Array<IBook> {
+  public get books(): Array<IBook> {
     return this._books;
   }
-
 }

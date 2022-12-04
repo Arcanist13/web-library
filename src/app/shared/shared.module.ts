@@ -11,8 +11,8 @@ const MATERIAL_IMPORTS = [
   MatListModule,
   MatIconModule,
 ];
-const SHARED_COMPONENTS = [];
-const SHARED_DIALOG = [];
+// const SHARED_COMPONENTS = [];
+// const SHARED_DIALOG = [];
 const SHARED_PIPES = [
   SplitOnSlashPipe
 ];

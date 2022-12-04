@@ -1,0 +1,55 @@
+{
+  // DISPLAY
+  "editor.renderWhitespace": "all",
+  "files.exclude": {
+    "**/.angular": true
+  },
+
+  // ANGULAR
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "**/bazel-out": true,
+    "**/dist": true,
+    "**/aio/src/generated": true,
+    ".history": true,
+  },
+  "files.watcherExclude": {
+    "**/node_modules/**": true,
+    "**/dist/**": true,
+    "**/coverage/**": true,
+    "**/luciad/**": true,
+  },
+
+  // FORMATTING
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true,
+  "diffEditor.ignoreTrimWhitespace": true,
+  "editor.trimAutoWhitespace": true,
+  "editor.rulers": [
+    160
+  ],
+  "editor.formatOnSave": true,
+  "javascript.format.enable": true,
+  "typescript.format.enable": true,
+  "yaml.format.enable": true,
+  "json.format.enable": true,
+  "html.format.enable": true,
+  "css.format.enable": true,
+  "less.format.enable": true,
+  "scss.format.enable": true,
+  "eslint.format.enable": true,
+  "editor.formatOnSaveMode": "file",
+
+  // PYTHON
+  "python.linting.enabled": true,
+  "python.linting.pylintPath": "webserver/venv/bin/pylint",
+  "python.analysis.extraPaths": [
+    "webserver/venv/lib/python3.8/site-packages"
+  ],
+  "python.terminal.activateEnvInCurrentTerminal": true,
+  "python.terminal.activateEnvironment": true,
+  "python.defaultInterpreterPath": "webserver/venv/bin/python3.8",
+}

@@ -7,7 +7,6 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class HttpService {
-
   constructor(
     private _http: HttpClient,
   ) { }
@@ -60,7 +59,8 @@ export class HttpService {
       // The response body may contain clues as to what went wrong.
       console.error(
         `ERROR (spell.service): HTTP Error ${error.status}, ` +
-        `Message: ${error.error}`);
+        `Message: ${error.error}`
+);
     }
     // Return an observable with a user-facing error message.
     return throwError('Request failed.');

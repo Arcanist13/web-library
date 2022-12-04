@@ -20,5 +20,4 @@ export class LibraryComponent {
   public get books() : Array<IBook> {
     return this._libraryService.books;
   }
-
 }

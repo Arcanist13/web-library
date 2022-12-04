@@ -4,9 +4,7 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'splitOnSlash'
 })
 export class SplitOnSlashPipe implements PipeTransform {
-
   transform(value?: string): string {
-    return !!value ? value.split('/').join(', ').trim() : '';
+    return value ? value.split('/').join(', ').trim() : '';
   }
-
 }

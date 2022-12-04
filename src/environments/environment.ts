@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  backendUri: 'http://' + window.location.hostname + ':5000'
+  backendUri: `http://${window.location.hostname}:5000`
 };

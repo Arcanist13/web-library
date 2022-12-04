@@ -3,7 +3,6 @@ import { Observable, Subscription } from 'rxjs';
 
 @Injectable()
 export class ObservableService implements OnDestroy {
-
   private readonly _subscriptions: Array<Subscription>;
 
   constructor() {
@@ -24,7 +23,7 @@ export class ObservableService implements OnDestroy {
     error?: (error: any) => void,
     complete?: () => void
   ) {
-    this._subscriptions.push(o.subscribe({next, error, complete}));
+    this._subscriptions.push(o.subscribe({ next, error, complete }));
   }
 
   /**
