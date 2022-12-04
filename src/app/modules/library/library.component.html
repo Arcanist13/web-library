@@ -1,0 +1,8 @@
+
+<mat-list>
+  <mat-list-item *ngFor="let book of books">
+    <img matListItemAvatar [src]="getIcon(book.image_icon)" alt="`${book.name} cover image.`">
+    <div matListItemTitle>{{ book.name }}</div>
+    <div matListItemLine>{{ book.authour | splitOnSlash }}</div>
+  </mat-list-item>
+</mat-list>
