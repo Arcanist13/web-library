@@ -12,8 +12,21 @@ class ImageProcessing:
     # Standardise background
     result = self.std_background(img_cv)
 
+    # Find the white area and crop to it
+    _, thresh = cv2.threshold(cv2.cvtColor(result, cv2.COLOR_BGR2GRAY), 250, 255, cv2.THRESH_BINARY)
+    element = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (30,30))
+    mask = cv2.erode(thresh, element, iterations = 2)
+    mask = cv2.dilate(mask, element, iterations = 2)
+
+    x1,y1,w,h = cv2.boundingRect(mask)
+    x2 = x1+w
+    y2 = y1+h
+    cv2.rectangle(result, (x1, y1), (x2, y2), (255,255,255), 50)
+    result = result[y1:y2, x1:x2]
+    img_cv = img_cv[y1:y2, x1:x2]
+
     # Create bounding box of content on white background and crop
-    ret, thresh = cv2.threshold(result, 250, 255, cv2.THRESH_BINARY_INV)
+    _, thresh = cv2.threshold(result, 250, 255, cv2.THRESH_BINARY_INV)
     x1,y1,w,h = cv2.boundingRect(cv2.cvtColor(thresh, cv2.COLOR_BGR2GRAY))
     x2 = x1+w
     y2 = y1+h
@@ -22,10 +35,10 @@ class ImageProcessing:
     # Scale and flip image as required to generate full size image and icon
     flipped = self.ensure_vertical(cropped)
     transformed_full = self.scale_image(flipped, image_width)
-    full_string = cv2.imencode('.jpg', transformed_full)[1].toString()
+    full_string = cv2.imencode('.jpg', transformed_full)[1]
 
     transformed_icon = self.scale_image(flipped, icon_width)
-    icon_string = cv2.imencode('.jpg', transformed_icon)[1].toString()
+    icon_string = cv2.imencode('.jpg', transformed_icon)[1]
 
     return (full_string, icon_string)
 
