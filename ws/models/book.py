@@ -21,3 +21,9 @@ class NewBook(BaseModel):
   series_number:     Optional[int] = None
   series_total:      Optional[int] = None
   image:             Optional[str] = None
+
+class Series(BaseModel):
+  authours:          str
+  series_name:       str
+  series_numbers:    str
+  series_total:      int

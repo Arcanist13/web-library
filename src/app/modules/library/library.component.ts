@@ -11,13 +11,17 @@ import { LibraryService } from './services/library.service';
 export class LibraryComponent {
   constructor(
     private _libraryService: LibraryService,
-  ) {}
+  ) { }
 
   public getIcon(icon_string?: string): SafeResourceUrl | string {
     return this._libraryService.getIcon(icon_string);
   }
 
-  public get books() : Array<IBook> {
+  public get books(): Array<IBook> {
     return this._libraryService.books;
+  }
+
+  public trackById(index: number, item: IBook): any {
+    return item.id;
   }
 }

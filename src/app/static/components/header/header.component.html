@@ -1,1 +1,47 @@
-<p>header works!</p>
+<ng-template #header>
+  <!-- Page Navigation -->
+  <ul class="navbar-nav me-auto">
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/library" routerLinkActive="active">Books</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/library/series" routerLinkActive="active">Series</a>
+    </li>
+  </ul>
+
+  <hr>
+
+  <!-- User State -->
+  <div class="navbar-nav ms-auto text-center">
+    <button *ngIf="!loggedIn" mat-stroked-button
+      [ngClass]="{'mx-5': !navCollapsed, 'mb-2': !navCollapsed, 'me-1': navCollapsed}"
+      (click)="navigate('/user/login')">Login</button>
+    <button *ngIf="loggedIn" mat-stroked-button [ngClass]="{'mx-5': !navCollapsed, 'me-1': navCollapsed}"
+      (click)="logout()">Logout</button>
+    <button *ngIf="!loggedIn" mat-stroked-button [ngClass]="{'mx-5': !navCollapsed}"
+      (click)="navigate('/user/register')">Register</button>
+  </div>
+</ng-template>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" (click)="navigate('/library')">Library</a>
+
+    <button class="navbar-toggler" type="button" mat-button [matMenuTriggerFor]="menu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Display for small screens -->
+    <mat-menu #menu="matMenu">
+      <div class="px-2">
+        <ng-container *ngTemplateOutlet="header"></ng-container>
+      </div>
+    </mat-menu>
+
+    <!-- Display for large screens -->
+    <div class="collapse navbar-collapse">
+      <ng-container *ngTemplateOutlet="header"></ng-container>
+    </div>
+
+  </div>
+</nav>

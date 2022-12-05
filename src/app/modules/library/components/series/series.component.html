@@ -1,0 +1,18 @@
+<mat-list>
+  <mat-list-item *ngFor="let serie of series; trackBy: trackBySeries">
+    <div matListItemTitle>
+      {{ serie.series_name }}
+      <span [ngClass]="getSeriesCompleteness(serie.series_numbers, serie.series_total)">
+        ({{ seriesProportion(serie.series_numbers, serie.series_total) | percent }})
+      </span>
+    </div>
+    <div matListItemLine>
+      {{ serie.authours | splitOnSeparator: '/' }}
+    </div>
+    <div matListItemLine>
+      <span *ngFor="let idx of fillSeriesGaps(serie.series_numbers, serie.series_total); trackBy: trackByIndex">
+        {{ idx }}
+      </span>
+    </div>
+  </mat-list-item>
+</mat-list>
