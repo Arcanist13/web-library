@@ -1,7 +1,30 @@
+<div class="row">
+  <button mat-fab class="book-button" color="success" (click)="createBook()" matTooltip="Add"
+    aria-label="Button that switches to add a new book mode">
+    <mat-icon>add_circle</mat-icon>
+  </button>
+</div>
+
 <mat-list>
-  <mat-list-item *ngFor="let book of books; trackBy: trackById">
-    <img matListItemAvatar [src]="getIcon(book.image_icon)" alt="`${book.name} cover image.`">
-    <div matListItemTitle>{{ book.name }}</div>
-    <div matListItemLine>{{ book.authour | splitOnSeparator: '/' }}</div>
-  </mat-list-item>
+  <div *ngFor="let book of books; trackBy: trackById">
+    <div class="row">
+      <div class="col" (click)="viewBook(book)">
+        <mat-list-item class="book-select">
+          <img matListItemAvatar [src]="getIcon(book.image_icon)" alt="`${book.name} cover image.`">
+          <div matListItemTitle>{{ book.name }}</div>
+          <div matListItemLine>{{ book.authour | splitOnSeparator: '/' }}</div>
+        </mat-list-item>
+      </div>
+      <div *ngIf="isLoggedIn" class="col-auto">
+        <button mat-fab class="book-button" color="general" (click)="editBook(book)" matTooltip="Edit"
+          aria-label="Button that switches to edit book mode">
+          <mat-icon>edit_note</mat-icon>
+        </button>
+        <button mat-fab class="book-button" color="danger" (click)="confirmDelete(book.id, book.name)"
+          matTooltip="Delete" aria-label="Button that deletes the book" aria-label="Delete book button">
+          <mat-icon>delete_forever</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
 </mat-list>

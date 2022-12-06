@@ -15,12 +15,13 @@ class Book(BaseModel):
 
 class NewBook(BaseModel):
   name:              str
-  authour:           int
+  authour:           str
   genres:            Optional[str] = None
   series_name:       Optional[str] = None
   series_number:     Optional[int] = None
   series_total:      Optional[int] = None
-  image:             Optional[str] = None
+  image_full:        Optional[str] = None
+  image_icon:        Optional[str] = None
 
 class Series(BaseModel):
   authours:          str

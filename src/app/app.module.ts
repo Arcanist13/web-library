@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { OAuthModule } from 'angular-oauth2-oidc';
+import { environment } from 'src/environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,12 +16,18 @@ const APP_MODULES = [
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     StaticModule,
+    OAuthModule.forRoot({
+      resourceServer: {
+        allowedUrls: [environment.backendUri],
+        sendAccessToken: true
+      }
+    }),
     APP_MODULES,
   ],
   providers: [],

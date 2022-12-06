@@ -2,10 +2,11 @@
   <!-- Page Navigation -->
   <ul class="navbar-nav me-auto">
     <li class="nav-item">
-      <a class="nav-link" routerLink="/library" routerLinkActive="active">Books</a>
+      <a class="nav-link" (click)="navigate('/library')" routerLinkActive="active"
+        aria-label="Button that navigates to the library">Books</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" routerLink="/library/series" routerLinkActive="active">Series</a>
+      <a class="nav-link" (click)="navigate('/library/series')" routerLinkActive="active">Series</a>
     </li>
   </ul>
 
@@ -13,13 +14,13 @@
 
   <!-- User State -->
   <div class="navbar-nav ms-auto text-center">
-    <button *ngIf="!loggedIn" mat-stroked-button
-      [ngClass]="{'mx-5': !navCollapsed, 'mb-2': !navCollapsed, 'me-1': navCollapsed}"
-      (click)="navigate('/user/login')">Login</button>
-    <button *ngIf="loggedIn" mat-stroked-button [ngClass]="{'mx-5': !navCollapsed, 'me-1': navCollapsed}"
-      (click)="logout()">Logout</button>
-    <button *ngIf="!loggedIn" mat-stroked-button [ngClass]="{'mx-5': !navCollapsed}"
-      (click)="navigate('/user/register')">Register</button>
+    <button *ngIf="!isLoggedIn" mat-stroked-button
+      [ngClass]="{'mx-5': !navCollapsed, 'mb-2': !navCollapsed, 'me-1': navCollapsed}" (click)="navigate('/user/login')"
+      aria-label="Button that navigates to the login page">Login</button>
+    <button *ngIf="isLoggedIn" mat-stroked-button [ngClass]="{'mx-5': !navCollapsed, 'me-1': navCollapsed}"
+      (click)="logout()" aria-label="Button that logs out the user">Logout</button>
+    <button *ngIf="!isLoggedIn" mat-stroked-button [ngClass]="{'mx-5': !navCollapsed}"
+      (click)="navigate('/user/register')" aria-label="Button that navigates to the register page">Register</button>
   </div>
 </ng-template>
 
@@ -27,7 +28,8 @@
   <div class="container-fluid">
     <a class="navbar-brand" (click)="navigate('/library')">Library</a>
 
-    <button class="navbar-toggler" type="button" mat-button [matMenuTriggerFor]="menu">
+    <button class="navbar-toggler" type="button" mat-button [matMenuTriggerFor]="menu"
+      aria-label="Button that navigates to the home page">
       <span class="navbar-toggler-icon"></span>
     </button>
 

@@ -22,3 +22,19 @@ async def get_all_series():
     GROUP BY series_name
   ''')
   return series
+
+@router.get('/authours', tags=["series"])
+async def get_all_authours():
+  '''Get all authours.'''
+  authours = get_db_all('''
+    SELECT GROUP_CONCAT(authour, "/") as "authours" FROM (SELECT DISTINCT authour FROM books)
+  ''')
+  return authours[0]['authours'].split('/')
+
+@router.get('/series/name', tags=["series"])
+async def get_all_series_names():
+  '''Get all series names.'''
+  series = get_db_all('''
+    SELECT DISTINCT series_name FROM books WHERE series_name IS NOT NULL
+  ''')
+  return [v['series_name'] for v in series]

@@ -1,0 +1,27 @@
+mat-card {
+  max-width: 600px;
+  margin: 2em auto;
+  text-align: center;
+}
+
+mat-form-field {
+  display: block;
+}
+
+.edit-button {
+  align-self: flex-start;
+  pointer-events: auto;
+  margin-left: 4px;
+  margin-right: 4px;
+  width: 30px;
+  height: 30px;
+}
+
+.full-text {
+  color: black;
+}
+
+.mat-general {
+  background-color: #0d6efd;
+  color: #fff;
+}

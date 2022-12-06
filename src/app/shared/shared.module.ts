@@ -4,13 +4,23 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { splitOnSeparatorPipe } from './pipes/split-on-separator.pipe';
+import { SplitOnSeparatorPipe } from './pipes/split-on-separator.pipe';
 
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatCardModule } from '@angular/material/card';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+
+import { ConfirmComponent } from './modals/confirm/confirm.component';
+import { NiceKeyStringPipe } from './pipes/nice-key-string.pipe';
 
 const MATERIAL_IMPORTS = [
   MatListModule,
@@ -18,18 +28,28 @@ const MATERIAL_IMPORTS = [
   MatToolbarModule,
   MatButtonModule,
   MatMenuModule,
+  MatCardModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatDialogModule,
+  MatSnackBarModule,
+  MatTooltipModule,
+  MatAutocompleteModule,
 ];
 // const SHARED_COMPONENTS = [];
-// const SHARED_DIALOG = [];
+const SHARED_DIALOG = [
+  ConfirmComponent,
+];
 const SHARED_PIPES = [
-  splitOnSeparatorPipe,
+  SplitOnSeparatorPipe,
+  NiceKeyStringPipe,
 ];
 
 @NgModule({
   declarations: [
     // ...SHARED_COMPONENTS,
     ...SHARED_PIPES,
-    // ...SHARED_DIALOG,
+    ...SHARED_DIALOG,
   ],
   imports: [
     CommonModule,
@@ -47,7 +67,7 @@ const SHARED_PIPES = [
     // ...SHARED_COMPONENTS,
     ...SHARED_PIPES,
     ...MATERIAL_IMPORTS,
-    // ...SHARED_DIALOG,
+    ...SHARED_DIALOG,
   ]
 })
 export class SharedModule { }
