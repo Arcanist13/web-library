@@ -7,7 +7,6 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class SeriesService {
-
   private _series: Array<ISeries> = [];
 
   constructor(
@@ -22,5 +21,4 @@ export class SeriesService {
   public get series(): Array<ISeries> {
     return this._series;
   }
-
 }

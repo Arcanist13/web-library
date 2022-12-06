@@ -8,15 +8,12 @@ import { SeriesService } from '../../services/series.service';
   styleUrls: ['./series.component.scss']
 })
 export class SeriesComponent {
-
   constructor(
     private _seriesService: SeriesService
   ) { }
 
   public get series(): Array<ISeries> {
-    return this._seriesService.series.sort((a, b) => {
-      return this.seriesProportion(b.series_numbers, b.series_total) - this.seriesProportion(a.series_numbers, a.series_total)
-    });
+    return this._seriesService.series.sort((a, b) => this.seriesProportion(b.series_numbers, b.series_total) - this.seriesProportion(a.series_numbers, a.series_total));
   }
 
   public seriesProportion(owned: string, total: number): number {
@@ -25,12 +22,13 @@ export class SeriesComponent {
 
   public fillSeriesGaps(owned: string, total: number): Array<string> {
     const split = owned.split(',');
-    return [...Array(total).fill('X').map((val, idx) => split.includes((idx + 1).toString()) ? (idx + 1).toString() : 'X')];
+    return [...Array(total).fill('X').map((val, idx) => (split.includes((idx + 1).toString()) ? (idx + 1).toString() : 'X'))];
   }
 
   public getSeriesCompleteness(owned: string, total: number): string {
     const proportion = this.seriesProportion(owned, total);
-    return proportion === 1 ? 'text-success' : proportion > 0.4 ? 'text-warning' : 'text-danger';
+    if (proportion === 1) return 'text-success';
+    return proportion > 0.4 ? 'text-warning' : 'text-danger';
   }
 
   public trackBySeries(index: number, series: ISeries) {
@@ -40,5 +38,4 @@ export class SeriesComponent {
   public trackByIndex(index: number): any {
     return index;
   }
-
 }

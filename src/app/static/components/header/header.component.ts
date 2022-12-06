@@ -7,7 +7,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
-
   navCollapsed: boolean;
   loggedIn: boolean;
 
