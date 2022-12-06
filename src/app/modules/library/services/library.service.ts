@@ -11,9 +11,9 @@ import { environment } from 'src/environments/environment';
 })
 export class LibraryService {
   private _books: Array<IBook> = [];
-  private _authours?: Array<string>;
-  private _genres?: Array<string>;
-  private _series?: Array<string>;
+  private _authours: Array<string> = [];
+  private _genres: Array<string> = [];
+  private _series: Array<string> = [];
 
   private _selectedBook: IBook | undefined;
   private _editing: boolean;
@@ -34,6 +34,10 @@ export class LibraryService {
       },
       error: () => { this._snackService.openInfoSnack('Failed to fetch books from the backend.'); }
     });
+
+    this.getAuthours();
+    this.getSeries();
+    this.getGenres();
   }
 
   public getBook(id: number): Promise<IBook> {
@@ -107,10 +111,8 @@ export class LibraryService {
   }
 
   public getAuthours(): Promise<Array<string>> {
-    console.log("getAuthours called")
-    return new Promise((resolve) => resolve(['']));
     return new Promise((resolve, reject) => {
-      if (this._authours !== undefined) {
+      if (this._authours.length > 0) {
         resolve(this._authours);
       }
       else {
@@ -124,12 +126,13 @@ export class LibraryService {
       }
     });
   }
+  public get authours(): Array<string> {
+    return this._authours;
+  }
 
   public getGenres(): Promise<Array<string>> {
-    console.log("getGenres called")
-    return new Promise((resolve) => resolve(['']));
     return new Promise((resolve, reject) => {
-      if (this._genres !== undefined) {
+      if (this._genres.length > 0) {
         resolve(this._genres);
       }
       else {
@@ -143,12 +146,13 @@ export class LibraryService {
       }
     });
   }
+  public get genres(): Array<string> {
+    return this._genres;
+  }
 
   public getSeries(): Promise<Array<string>> {
-    console.log("getSeries called")
-    return new Promise((resolve) => resolve(['']));
     return new Promise((resolve, reject) => {
-      if (this._series !== undefined) {
+      if (this._series.length > 0) {
         resolve(this._series);
       }
       else {
@@ -161,6 +165,9 @@ export class LibraryService {
         });
       }
     });
+  }
+  public get series(): Array<string> {
+    return this._series;
   }
 
   public get books(): Array<IBook> {
@@ -180,5 +187,4 @@ export class LibraryService {
   public set editing(value: boolean) {
     this._editing = value;
   }
-
 }

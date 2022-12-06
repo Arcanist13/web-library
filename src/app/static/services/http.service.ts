@@ -42,5 +42,4 @@ export class HttpService {
   public post<T>(addr: string, options?: object): Observable<T> {
     return this._http.post<T>(addr, options);
   }
-
 }

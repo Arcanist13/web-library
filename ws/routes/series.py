@@ -29,7 +29,7 @@ async def get_all_authours():
   authours = get_db_all('''
     SELECT GROUP_CONCAT(authour, "/") as "authours" FROM (SELECT DISTINCT authour FROM books)
   ''')
-  return authours[0]['authours'].split('/')
+  return set(authours[0]['authours'].split('/'))
 
 @router.get('/series/name', tags=["series"])
 async def get_all_series_names():

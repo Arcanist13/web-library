@@ -14,7 +14,6 @@ import { LibraryService } from './services/library.service';
   providers: [ObservableService]
 })
 export class LibraryComponent {
-
   public isLoggedIn: boolean;
 
   constructor(
@@ -67,5 +66,4 @@ export class LibraryComponent {
   public viewBook(book: IBook): void {
     this._libraryService.viewBook(book, false);
   }
-
 }

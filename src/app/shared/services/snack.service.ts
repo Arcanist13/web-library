@@ -5,7 +5,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   providedIn: 'root'
 })
 export class SnackService {
-
   constructor(
     private _snackBar: MatSnackBar
   ) { }
@@ -19,5 +18,4 @@ export class SnackService {
       }
     );
   }
-
 }

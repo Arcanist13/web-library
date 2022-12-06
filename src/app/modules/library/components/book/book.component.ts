@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { map, Observable, startWith } from 'rxjs';
 import { IBook } from 'src/app/static/models/book.model';
 import { LibraryService } from '../../services/library.service';
 
@@ -15,6 +16,10 @@ export class BookComponent {
   public submitText = '';
   public editing: boolean;
   public data?: IBook;
+
+  public filteredAuthours: Observable<Array<string>>;
+  public filteredGenres: Observable<Array<string>>;
+  public filteredSeries: Observable<Array<string>>;
 
   constructor(
     private _router: Router,
@@ -36,20 +41,42 @@ export class BookComponent {
     }
 
     // Initialise the form with known data
+    const authForm = new FormControl(this.data?.authour, [Validators.required]);
+    const genreForm = new FormControl(this.data?.genres, []);
+    const seriesForm = new FormControl(this.data?.series_name, []);
+
     this.form = new FormGroup(
       {
         name: new FormControl(this.data?.name, [Validators.required]),
-        authour: new FormControl(this.data?.authour, [Validators.required]),
-        genres: new FormControl(this.data?.genres, []),
-        series_name: new FormControl(this.data?.series_name, []),
+        authour: authForm,
+        genres: genreForm,
+        series_name: seriesForm,
         series_number: new FormControl(this.data?.series_number, []),
         series_total: new FormControl(this.data?.series_total, [])
       }
     );
 
+    this.filteredAuthours = authForm.valueChanges.pipe(
+      startWith(''),
+      map((value) => this._filter(value || '', this._libraryService.authours)),
+    );
+    this.filteredGenres = genreForm.valueChanges.pipe(
+      startWith(''),
+      map((value) => this._filter(value || '', this._libraryService.genres)),
+    );
+    this.filteredSeries = seriesForm.valueChanges.pipe(
+      startWith(''),
+      map((value) => this._filter(value || '', this._libraryService.series)),
+    );
+
     if (!this.editing) {
       this.form.disable();
     }
+  }
+
+  private _filter(value: string, list: Array<string>): Array<string> {
+    const filterValue = value.toLowerCase();
+    return list.filter((option) => option.toLowerCase().includes(filterValue));
   }
 
 
@@ -104,16 +131,14 @@ export class BookComponent {
     }
   }
 
-  public getAutocomplete(key: string): Promise<Array<string>> {
+  public getAutocomplete(key: string): Observable<Array<string>> {
     switch (key) {
       case 'authour':
-        return this._libraryService.getAuthours();
+        return this.filteredAuthours;
       case 'genres':
-        return this._libraryService.getGenres();
-      case 'series_name':
-        return this._libraryService.getSeries();
+        return this.filteredGenres;
       default:
-        return new Promise((resolve) => resolve(['']));
+        return this.filteredSeries;
     }
   }
 
