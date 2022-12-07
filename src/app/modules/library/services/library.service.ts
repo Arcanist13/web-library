@@ -5,6 +5,7 @@ import { SnackService } from 'src/app/shared/services/snack.service';
 import { IBook } from 'src/app/static/models/book.model';
 import { HttpService } from 'src/app/static/services/http.service';
 import { environment } from 'src/environments/environment';
+import { UserService } from '../../user/services/user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,10 +20,11 @@ export class LibraryService {
   private _editing: boolean;
 
   constructor(
-    private _httpService: HttpService,
-    private _sanitizer: DomSanitizer,
     private _router: Router,
+    private _sanitizer: DomSanitizer,
+    private _httpService: HttpService,
     private _snackService: SnackService,
+    private _userService: UserService,
   ) {
     this._selectedBook = undefined;
     this._editing = false;
@@ -55,19 +57,23 @@ export class LibraryService {
   }
 
   public createBook(details: IBook): void {
-    this._httpService.post<IBook>(`${environment.backendUri}/book/add`, details).subscribe({
-      next: (newBook: IBook) => {
-        this._snackService.openInfoSnack(`Sucessfully created ${newBook.name}.`);
+    if (this._userService.onLoginStateUpdate.value) {
+      this._httpService.post<IBook>(`${environment.backendUri}/book/add`, details).subscribe({
+        next: (newBook: IBook) => {
+          this._snackService.openInfoSnack(`Sucessfully created ${newBook.name}.`);
 
-        // Update the list
-        this._books.push(newBook);
+          // Update the list
+          this._books.push(newBook);
 
-        this._router.navigate(['/library']);
-        this._editing = false;
-        this._selectedBook = undefined;
-      },
-      error: () => { this._snackService.openInfoSnack('Failed to create the new book.'); }
-    });
+          this._router.navigate(['/library']);
+          this._editing = false;
+          this._selectedBook = undefined;
+        },
+        error: () => { this._snackService.openInfoSnack('Failed to create the new book.'); }
+      });
+    } else {
+      this._snackService.openInfoSnack('Must be logged in to create a new book.');
+    }
   }
 
   public viewBook(book: IBook | undefined, edit = false): void {
@@ -77,30 +83,38 @@ export class LibraryService {
   }
 
   public updateBook(details: IBook): void {
-    this._httpService.post<IBook>(`${environment.backendUri}/book/edit/${details.id}`, details).subscribe({
-      next: (newBook: IBook) => {
-        this._snackService.openInfoSnack(`Sucessfully editied ${newBook.name}.`);
+    if (this._userService.onLoginStateUpdate.value) {
+      this._httpService.post<IBook>(`${environment.backendUri}/book/edit/${details.id}`, details).subscribe({
+        next: (newBook: IBook) => {
+          this._snackService.openInfoSnack(`Sucessfully editied ${newBook.name}.`);
 
-        // Update the list
-        const foundIdx = this._books.findIndex((b) => b.id === details.id);
-        if (foundIdx !== -1) this._books[foundIdx] = details;
+          // Update the list
+          const foundIdx = this._books.findIndex((b) => b.id === details.id);
+          if (foundIdx !== -1) this._books[foundIdx] = details;
 
-        this._router.navigate(['/library']);
-        this._editing = false;
-        this._selectedBook = undefined;
-      },
-      error: () => { this._snackService.openInfoSnack('Failed to edit the book.'); }
-    });
+          this._router.navigate(['/library']);
+          this._editing = false;
+          this._selectedBook = undefined;
+        },
+        error: () => { this._snackService.openInfoSnack('Failed to edit the book.'); }
+      });
+    } else {
+      this._snackService.openInfoSnack('Must be logged in to update a book.');
+    }
   }
 
   public deleteBook(id: number, name: string): void {
-    this._httpService.delete(`${environment.backendUri}/book/remove/${id}`).subscribe({
-      next: () => {
-        this._snackService.openInfoSnack(`Sucessfully deleted ${name}.`);
-        this._books = this._books.filter((book: IBook) => book.id !== id);
-      },
-      error: () => { this._snackService.openInfoSnack('Failed to delete the book.'); }
-    });
+    if (this._userService.onLoginStateUpdate.value) {
+      this._httpService.delete(`${environment.backendUri}/book/remove/${id}`).subscribe({
+        next: () => {
+          this._snackService.openInfoSnack(`Sucessfully deleted ${name}.`);
+          this._books = this._books.filter((book: IBook) => book.id !== id);
+        },
+        error: () => { this._snackService.openInfoSnack('Failed to delete the book.'); }
+      });
+    } else {
+      this._snackService.openInfoSnack('Must be logged in to delete a book.');
+    }
   }
 
   public getIcon(icon_string?: string): SafeResourceUrl | string {

@@ -5,6 +5,7 @@ import { ConfirmComponent } from 'src/app/shared/modals/confirm/confirm.componen
 import { IBook } from 'src/app/static/models/book.model';
 import { ObservableService } from 'src/app/static/services/observable.service';
 import { UserService } from '../user/services/user.service';
+import { FilterService } from './services/filter.service';
 import { LibraryService } from './services/library.service';
 
 @Component({
@@ -14,20 +15,21 @@ import { LibraryService } from './services/library.service';
   providers: [ObservableService]
 })
 export class LibraryComponent {
-  public isLoggedIn: boolean;
+  public loggedIn: boolean;
 
   constructor(
     private _observableService: ObservableService,
+    private _dialog: MatDialog,
     private _libraryService: LibraryService,
     private _userService: UserService,
-    private _dialog: MatDialog,
+    private _filterService: FilterService,
   ) {
-    // Subscribe to login state changes
-    this.isLoggedIn = this._userService.onLoginStateUpdate.value;
+    // Subscribe to login state changes (for logout mostly)
+    this.loggedIn = this._userService.onLoginStateUpdate.value;
     this._observableService.subscribe(
       this._userService.onLoginStateUpdate,
       (state: boolean) => {
-        this.isLoggedIn = state;
+        this.loggedIn = state;
       }
     );
   }
@@ -37,7 +39,7 @@ export class LibraryComponent {
   }
 
   public get books(): Array<IBook> {
-    return this._libraryService.books;
+    return this._filterService.filterBooks(this._libraryService.books);
   }
 
   public trackById(index: number, item: IBook): any {

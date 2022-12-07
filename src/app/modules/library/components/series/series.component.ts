@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { ISeries } from 'src/app/static/models/series.model';
+import { FilterService } from '../../services/filter.service';
 import { SeriesService } from '../../services/series.service';
 
 @Component({
@@ -9,8 +11,15 @@ import { SeriesService } from '../../services/series.service';
 })
 export class SeriesComponent {
   constructor(
-    private _seriesService: SeriesService
+    private _router: Router,
+    private _seriesService: SeriesService,
+    private _filterService: FilterService,
   ) { }
+
+  public viewSeries(name: string): void {
+    this._filterService.textFilter = name;
+    this._router.navigate(['/library']);
+  }
 
   public get series(): Array<ISeries> {
     return this._seriesService.series.sort((a, b) => this.seriesProportion(b.series_numbers, b.series_total) - this.seriesProportion(a.series_numbers, a.series_total));

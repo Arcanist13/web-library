@@ -2,13 +2,17 @@ import { Component } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { map, Observable, startWith } from 'rxjs';
+import { UserService } from 'src/app/modules/user/services/user.service';
+import { SnackService } from 'src/app/shared/services/snack.service';
 import { IBook } from 'src/app/static/models/book.model';
+import { ObservableService } from 'src/app/static/services/observable.service';
 import { LibraryService } from '../../services/library.service';
 
 @Component({
   selector: 'app-book',
   templateUrl: './book.component.html',
-  styleUrls: ['./book.component.scss']
+  styleUrls: ['./book.component.scss'],
+  providers: [ObservableService]
 })
 export class BookComponent {
   public form: FormGroup;
@@ -16,19 +20,37 @@ export class BookComponent {
   public submitText = '';
   public editing: boolean;
   public data?: IBook;
+  public loggedIn: boolean;
 
   public filteredAuthours: Observable<Array<string>>;
   public filteredGenres: Observable<Array<string>>;
   public filteredSeries: Observable<Array<string>>;
 
   constructor(
+    private _observableService: ObservableService,
     private _router: Router,
     private _libraryService: LibraryService,
+    private _userService: UserService,
+    private _snackService: SnackService,
   ) {
     this.editing = this._libraryService.editing;
     this.data = this._libraryService.selectedBook;
 
-    if (!this.editing && !this.data) {
+    // Subscribe to login state changes (for logout mostly)
+    this.loggedIn = this._userService.onLoginStateUpdate.value;
+    this._observableService.subscribe(
+      this._userService.onLoginStateUpdate,
+      (state: boolean) => {
+        this.loggedIn = state;
+        if (!this.loggedIn && this.editing) {
+          this.editing = false;
+          this.form.disable();
+        }
+      }
+    );
+
+    if ((!this.editing && !this.data) || (this.editing && !this.loggedIn)) {
+      this._snackService.openInfoSnack('Failed to load book data.');
       this._router.navigate(['/library']);
     }
 
@@ -147,6 +169,12 @@ export class BookComponent {
   }
 
   public editBook(): void {
+    if (!this.loggedIn) {
+      this._snackService.openInfoSnack('Must be logged in to edit books.');
+      this._router.navigate(['/library']);
+      return;
+    }
+
     this.editing = true;
     this.form.enable();
   }

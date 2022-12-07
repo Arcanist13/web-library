@@ -3,7 +3,7 @@
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <h2>
         {{ getHeaderText() }}
-        <button *ngIf="!editing" mat-mini-fab class="edit-button ms-3" color="general" (click)="editBook()"
+        <button *ngIf="!editing && loggedIn" mat-mini-fab class="edit-button ms-3" color="general" (click)="editBook()"
           matTooltip="Edit" aria-label="Button that switches to edit book mode">
           <mat-icon>edit_note</mat-icon>
         </button>

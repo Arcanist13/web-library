@@ -1,5 +1,6 @@
 <mat-list>
-  <mat-list-item *ngFor="let serie of series; trackBy: trackBySeries">
+  <mat-list-item *ngFor="let serie of series; trackBy: trackBySeries" class="series-select"
+    (click)="viewSeries(serie.series_name)">
     <div matListItemTitle>
       {{ serie.series_name }}
       <span [ngClass]="getSeriesCompleteness(serie.series_numbers, serie.series_total)">
