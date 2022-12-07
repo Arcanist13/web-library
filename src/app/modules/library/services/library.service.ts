@@ -3,7 +3,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { SnackService } from 'src/app/shared/services/snack.service';
 import { HOME_PATH } from 'src/app/static/constants';
-import { IBook } from 'src/app/static/models/book.model';
+import { IBook, IBookIcon } from 'src/app/static/models/book.model';
 import { HttpService } from 'src/app/static/services/http.service';
 import { environment } from 'src/environments/environment';
 import { UserService } from '../../user/services/user.service';
@@ -42,6 +42,14 @@ export class LibraryService {
     this.getAuthours();
     this.getSeriesNames();
     this.getGenres();
+
+    // Load the library icons
+    this._httpService.get<Array<IBookIcon>>(`${environment.backendUri}/icons`).subscribe({
+      next: (icons: Array<IBookIcon>) => {
+        icons.every((icon: IBookIcon) => this._books[icon.id - 1].image_icon = icon.image_icon);
+      },
+      error: () => { this._snackService.openInfoSnack('Failed to fetch books from the backend.'); }
+    });
   }
 
   /**
