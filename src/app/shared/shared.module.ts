@@ -18,6 +18,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 import { ConfirmComponent } from './modals/confirm/confirm.component';
 import { NiceKeyStringPipe } from './pipes/nice-key-string.pipe';
@@ -35,6 +36,7 @@ const MATERIAL_IMPORTS = [
   MatSnackBarModule,
   MatTooltipModule,
   MatAutocompleteModule,
+  MatPaginatorModule,
 ];
 // const SHARED_COMPONENTS = [];
 const SHARED_DIALOG = [

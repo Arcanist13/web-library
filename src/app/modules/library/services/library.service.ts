@@ -121,7 +121,7 @@ export class LibraryService {
     if (icon_string) {
       return this._sanitizer.bypassSecurityTrustResourceUrl(`data:image/jpg;base64,${icon_string}`);
     }
-    return 'assets/missing_icon.jpg';
+    return 'assets/missing.png';
   }
 
   public getAuthours(): Promise<Array<string>> {

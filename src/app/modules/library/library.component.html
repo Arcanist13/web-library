@@ -2,20 +2,28 @@
   <div class="col">
     <app-filter></app-filter>
   </div>
-  <div class="col-auto">
-    <button *ngIf="loggedIn" mat-fab class="book-button" color="success" (click)="createBook()" matTooltip="Add"
+  <div *ngIf="loggedIn" class="col-auto">
+    <button mat-fab class="book-button" color="success" (click)="createBook()" matTooltip="Add"
       aria-label="Button that switches to add a new book mode">
       <mat-icon>add_circle</mat-icon>
     </button>
   </div>
 </div>
+<div class="row mt-1">
+  <mat-paginator #paginator class="w-100" (page)="handlePageEvent($event)" [length]="length" [pageSize]="pageSize"
+    [disabled]="disabled" [showFirstLastButtons]="showFirstLastButtons"
+    [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []" [hidePageSize]="hidePageSize" [pageIndex]="pageIndex"
+    aria-label="Select page">
+  </mat-paginator>
+</div>
+
 
 <mat-list>
   <div *ngFor="let book of books; trackBy: trackById">
     <div class="row">
       <div class="col" (click)="viewBook(book)">
         <mat-list-item class="book-select">
-          <img matListItemAvatar [src]="getIcon(book.image_icon)" alt="`${book.name} cover image.`">
+          <img matListItemAvatar [src]="getIcon(book.image_icon)" [alt]="book.name + ' cover image.'">
           <div matListItemTitle>{{ book.name }}</div>
           <div matListItemLine>{{ book.authour | splitOnSeparator: '/' }}</div>
         </mat-list-item>
