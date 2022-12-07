@@ -1,0 +1,33 @@
+.book-button {
+  align-self: flex-start;
+  margin-top: 16px;
+  pointer-events: auto;
+  margin-left: 4px;
+  margin-right: 4px;
+  width: 40px;
+  height: 40px;
+}
+
+.mat-general {
+  background-color: #0d6efd;
+  color: #fff;
+}
+
+.mat-success {
+  background-color: #198754;
+  color: #fff;
+}
+
+.mat-danger {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.mat-warning {
+  background-color: #ffc107;
+  color: #fff;
+}
+
+.book-select {
+  cursor: pointer!important;
+}

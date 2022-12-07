@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
-import { RegisterComponent } from './components/register/register.component';
+// import { RegisterComponent } from './components/register/register.component';
 
 const USER_ROUTES = [
   {
@@ -10,12 +10,12 @@ const USER_ROUTES = [
     children: [],
     canActivate: []
   },
-  {
-    path: 'register',
-    component: RegisterComponent,
-    children: [],
-    canActivate: []
-  },
+  // {
+  //   path: 'register',
+  //   component: RegisterComponent,
+  //   children: [],
+  //   canActivate: []
+  // },
   { path: '**', redirectTo: 'login' }
 ];
 

@@ -6,7 +6,7 @@
     "start": "ng serve --host=0.0.0.0 --disable-host-check=true --configuration development",
     "startProd": "ng serve --host=0.0.0.0 --disable-host-check=true --configuration production",
     "build": "ng build",
-    "watch": "ng build --watch --configuration development",
+    "buildProd": "ng build --configuration production",
     "test": "ng test",
     "lint": "ng lint",
     "lintFix": "ng lint --fix"
@@ -23,6 +23,7 @@
     "@angular/platform-browser": "^15.0.0",
     "@angular/platform-browser-dynamic": "^15.0.0",
     "@angular/router": "^15.0.0",
+    "angular-oauth2-oidc": "^15.0.1",
     "bootstrap": "^5.2.3",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
