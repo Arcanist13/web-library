@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { SnackService } from 'src/app/shared/services/snack.service';
+import { HOME_PATH } from 'src/app/static/constants';
 import { IBook } from 'src/app/static/models/book.model';
 import { HttpService } from 'src/app/static/services/http.service';
 import { environment } from 'src/environments/environment';
@@ -37,11 +38,18 @@ export class LibraryService {
       error: () => { this._snackService.openInfoSnack('Failed to fetch books from the backend.'); }
     });
 
+    // Get the lists
     this.getAuthours();
-    this.getSeries();
+    this.getSeriesNames();
     this.getGenres();
   }
 
+  /**
+   * Get a specific book (all information)
+   *
+   * @param id  book id
+   * @returns   book
+   */
   public getBook(id: number): Promise<IBook> {
     return new Promise((resolve, reject) => {
       this._httpService.get<IBook>(`${environment.backendUri}/book/${id}`).subscribe({
@@ -56,6 +64,11 @@ export class LibraryService {
     });
   }
 
+  /**
+   * Create a new book
+   *
+   * @param details new book details
+   */
   public createBook(details: IBook): void {
     if (this._userService.onLoginStateUpdate.value) {
       this._httpService.post<IBook>(`${environment.backendUri}/book/add`, details).subscribe({
@@ -65,7 +78,7 @@ export class LibraryService {
           // Update the list
           this._books.push(newBook);
 
-          this._router.navigate(['/library']);
+          this._router.navigate([`/${HOME_PATH}`]);
           this._editing = false;
           this._selectedBook = undefined;
         },
@@ -76,12 +89,23 @@ export class LibraryService {
     }
   }
 
+  /**
+   * View or edit a book, navigates to the book page
+   *
+   * @param book  book to view/edit
+   * @param edit  toggle for editing mode
+   */
   public viewBook(book: IBook | undefined, edit = false): void {
     this._selectedBook = book;
     this._editing = edit;
     this._router.navigate(['/library/book']);
   }
 
+  /**
+   * Update a books details
+   *
+   * @param details new book details
+   */
   public updateBook(details: IBook): void {
     if (this._userService.onLoginStateUpdate.value) {
       this._httpService.post<IBook>(`${environment.backendUri}/book/edit/${details.id}`, details).subscribe({
@@ -92,7 +116,7 @@ export class LibraryService {
           const foundIdx = this._books.findIndex((b) => b.id === details.id);
           if (foundIdx !== -1) this._books[foundIdx] = details;
 
-          this._router.navigate(['/library']);
+          this._router.navigate([`/${HOME_PATH}`]);
           this._editing = false;
           this._selectedBook = undefined;
         },
@@ -103,6 +127,12 @@ export class LibraryService {
     }
   }
 
+  /**
+   * Remove a book from the library
+   *
+   * @param id    book id to remove
+   * @param name  name of the book
+   */
   public deleteBook(id: number, name: string): void {
     if (this._userService.onLoginStateUpdate.value) {
       this._httpService.delete(`${environment.backendUri}/book/remove/${id}`).subscribe({
@@ -124,6 +154,11 @@ export class LibraryService {
     return 'assets/missing.png';
   }
 
+  /**
+   * Request the list of authours from the backend
+   *
+   * @returns promise of authours list
+   */
   public getAuthours(): Promise<Array<string>> {
     return new Promise((resolve, reject) => {
       if (this._authours.length > 0) {
@@ -140,10 +175,18 @@ export class LibraryService {
       }
     });
   }
+  /**
+   * Get the list of authours
+   */
   public get authours(): Array<string> {
     return this._authours;
   }
 
+  /**
+   * Request the list of genres from the backend
+   *
+   * @returns promise of genre list
+   */
   public getGenres(): Promise<Array<string>> {
     return new Promise((resolve, reject) => {
       if (this._genres.length > 0) {
@@ -160,11 +203,19 @@ export class LibraryService {
       }
     });
   }
+  /**
+   * Get the list of genres
+   */
   public get genres(): Array<string> {
     return this._genres;
   }
 
-  public getSeries(): Promise<Array<string>> {
+  /**
+   * Request the list of series names from the backend
+   *
+   * @returns promise of series list
+   */
+  public getSeriesNames(): Promise<Array<string>> {
     return new Promise((resolve, reject) => {
       if (this._series.length > 0) {
         resolve(this._series);
@@ -180,24 +231,42 @@ export class LibraryService {
       }
     });
   }
+  /**
+   * Get the list of series
+   */
   public get series(): Array<string> {
     return this._series;
   }
 
+  /**
+   * Get the list of books in the library
+   */
   public get books(): Array<IBook> {
     return this._books;
   }
 
+  /**
+   * Get the currently selected book
+   */
   public get selectedBook(): IBook | undefined {
     return this._selectedBook;
   }
+  /**
+   * Set the currently selected book
+   */
   public set selectedBook(book: IBook | undefined) {
     this._selectedBook = book;
   }
 
+  /**
+   * Get the current editing status
+   */
   public get editing(): boolean {
     return this._editing;
   }
+  /**
+   * Set the editing status
+   */
   public set editing(value: boolean) {
     this._editing = value;
   }

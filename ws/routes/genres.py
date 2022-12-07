@@ -13,6 +13,6 @@ imageProcessing = ImageProcessing()
 ### Genres
 @router.get('/genres', response_model=Optional[List[str]], tags=["genre"])
 async def get_all_genres():
-  '''Get all genres.'''
+  '''Get all genres'''
   genres = get_db_all("SELECT * FROM genres ORDER BY id ASC")
   return [v['name'] for v in genres]

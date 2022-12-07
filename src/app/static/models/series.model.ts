@@ -1,3 +1,6 @@
+/**
+ * Book series model
+ */
 export interface ISeries {
   authours: string;
   series_name: string;

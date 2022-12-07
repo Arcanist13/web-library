@@ -2,14 +2,13 @@ from os import environ
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from routes import users, books, genres, series
+from routes import users, books, lists
 
 app = FastAPI()
 
 app.include_router(users.router)
 app.include_router(books.router)
-app.include_router(genres.router)
-app.include_router(series.router)
+app.include_router(lists.router)
 
 # Setup CORS
 origins = [

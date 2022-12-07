@@ -5,6 +5,8 @@
       <mat-error *ngIf="loginInvalid" class="mb-2">
         The username and password were not recognized.
       </mat-error>
+
+      <!-- Username field -->
       <mat-form-field class="full-width-input mb-2">
         <input matInput placeholder="Username" formControlName="username" required autofocus>
         <mat-error>
@@ -13,6 +15,8 @@
             characters</mat-error>
         </mat-error>
       </mat-form-field>
+
+      <!-- Password field -->
       <mat-form-field class="full-width-input mb-2">
         <input matInput type="password" placeholder="Password" formControlName="password" required>
         <mat-error>
@@ -21,6 +25,7 @@
             characters</mat-error>
         </mat-error>
       </mat-form-field>
+
       <button mat-raised-button color="primary">Login</button>
     </form>
   </mat-card-content>

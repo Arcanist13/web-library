@@ -9,6 +9,11 @@ export class SnackService {
     private _snackBar: MatSnackBar
   ) { }
 
+  /**
+   * Open an information snack
+   *
+   * @param msg message to display in the snack
+   */
   openInfoSnack(msg: string): void {
     this._snackBar.open(
       msg,

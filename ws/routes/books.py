@@ -7,7 +7,7 @@ from database.sqlite3 import delete_id, execute, get_db_all, get_db_one
 
 from auth.auth import get_current_user
 from models.user_model import User
-from models.book import Book, NewBook
+from models.book import Book, NewBook, BookIcon
 from image.image import ImageProcessing
 
 router = APIRouter()
@@ -16,9 +16,15 @@ imageProcessing = ImageProcessing()
 ### Books
 @router.get('/books', response_model=Optional[List[Book]], tags=["book"])
 async def get_all_books():
-  '''Get all books.'''
-  books = get_db_all("SELECT id, name, authour, genres, series_name, image_icon FROM books ORDER BY id ASC")
+  '''Get all books'''
+  books = get_db_all("SELECT id, name, authour, genres, series_name FROM books ORDER BY id ASC")
   return books
+
+@router.get('/icons', response_model=Optional[List[BookIcon]], tags=["book"])
+async def get_all_icons():
+  '''Get all icons.'''
+  icons = get_db_all("SELECT id, image_icon FROM books")
+  return icons
 
 @router.get('/book/{book_id}', response_model=Optional[Book], tags=["book"])
 async def get_book(book_id: int):
@@ -55,7 +61,7 @@ async def edit_book(book_id: int, book: NewBook, user: User = Depends(get_curren
 
 @router.post("/book/add", tags=["book"])
 async def add_book(book: NewBook, user: User = Depends(get_current_user)):
-  '''Add a new campaign'''
+  '''Add a new book'''
   if book is not None and user is not None:
     execute('''
       INSERT INTO books

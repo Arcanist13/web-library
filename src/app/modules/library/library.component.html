@@ -27,7 +27,7 @@
       <!-- Book -->
       <div class="col" (click)="viewBook(book)">
         <mat-list-item class="book-select">
-          <img matListItemAvatar [src]="getIcon(book.image_icon)" [alt]="book.name + ' cover image.'">
+          <img matListItemAvatar [src]="getIcon(book.image_icon)" [alt]="book.name + ' cover image.'" loading="lazy">
           <div matListItemTitle>{{ book.name }}</div>
           <div matListItemLine>{{ book.authour | splitOnSeparator: '/' }}</div>
         </mat-list-item>

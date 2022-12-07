@@ -1,6 +1,7 @@
 <mat-card>
   <mat-card-content>
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <!-- Title -->
       <h2>
         {{ getHeaderText() }}
         <button *ngIf="!editing && loggedIn" mat-mini-fab class="edit-button ms-3" color="general" (click)="editBook()"
@@ -12,6 +13,7 @@
         There is an error within the form.
       </mat-error>
 
+      <!-- Form fields -->
       <mat-form-field *ngFor="let key of getFormKeys()" class="full-width-input mb-2">
         <mat-label>{{ key | niceKeyString | titlecase }}</mat-label>
         <input matInput [formControlName]="key" [ngClass]="{'full-text': !editing}" [matAutocomplete]="auto"

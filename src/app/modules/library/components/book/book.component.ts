@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { map, Observable, startWith } from 'rxjs';
 import { UserService } from 'src/app/modules/user/services/user.service';
 import { SnackService } from 'src/app/shared/services/snack.service';
+import { HOME_PATH } from 'src/app/static/constants';
 import { IBook } from 'src/app/static/models/book.model';
 import { ObservableService } from 'src/app/static/services/observable.service';
 import { LibraryService } from '../../services/library.service';
@@ -49,9 +50,10 @@ export class BookComponent {
       }
     );
 
+    // Check mode and redirect on invalid mode
     if ((!this.editing && !this.data) || (this.editing && !this.loggedIn)) {
       this._snackService.openInfoSnack('Failed to load book data.');
-      this._router.navigate(['/library']);
+      this._router.navigate([`/${HOME_PATH}`]);
     }
 
     // Load missing data
@@ -67,6 +69,7 @@ export class BookComponent {
     const genreForm = new FormControl(this.data?.genres, []);
     const seriesForm = new FormControl(this.data?.series_name, []);
 
+    // Init the form data
     this.form = new FormGroup(
       {
         name: new FormControl(this.data?.name, [Validators.required]),
@@ -78,6 +81,7 @@ export class BookComponent {
       }
     );
 
+    // Create autocomplete filters
     this.filteredAuthours = authForm.valueChanges.pipe(
       startWith(''),
       map((value) => this._filter(value || '', this._libraryService.authours)),
@@ -96,6 +100,13 @@ export class BookComponent {
     }
   }
 
+  /**
+   * Filter a list based on a string value
+   *
+   * @param value string to search on
+   * @param list  initial list to search
+   * @returns     list matching filter
+   */
   private _filter(value: string, list: Array<string>): Array<string> {
     const filterValue = value.toLowerCase();
     return list.filter((option) => option.toLowerCase().includes(filterValue));
@@ -142,6 +153,12 @@ export class BookComponent {
     }
   }
 
+  /**
+   * Check if a field has an autocomplete
+   *
+   * @param key field name
+   * @returns   if the field has autocomplete
+   */
   public isAutocomplete(key: string): boolean {
     switch (key) {
       case 'authour':
@@ -153,6 +170,12 @@ export class BookComponent {
     }
   }
 
+  /**
+   * Get the autocomplete filter for a given field
+   *
+   * @param key field key
+   * @returns   the autocomplete filter observable
+   */
   public getAutocomplete(key: string): Observable<Array<string>> {
     switch (key) {
       case 'authour':
@@ -164,14 +187,20 @@ export class BookComponent {
     }
   }
 
+  /**
+   * Close the editing page
+   */
   public close(): void {
-    this._router.navigate(['/library']);
+    this._router.navigate([`/${HOME_PATH}`]);
   }
 
+  /**
+   * Switch to editing mode
+   */
   public editBook(): void {
     if (!this.loggedIn) {
       this._snackService.openInfoSnack('Must be logged in to edit books.');
-      this._router.navigate(['/library']);
+      this._router.navigate([`/${HOME_PATH}`]);
       return;
     }
 
@@ -179,18 +208,39 @@ export class BookComponent {
     this.form.enable();
   }
 
+  /**
+   * Get the form field keys
+   *
+   * @returns list of fields
+   */
   public getFormKeys(): Array<string> {
     return Object.keys(this.form.controls);
   }
 
+  /**
+   * Get a specific form field by name
+   *
+   * @param field field name
+   * @returns     form field
+   */
   public getField(field: string): AbstractControl | null {
     return this.form.get(field);
   }
 
+  /**
+   * Get the text to use as the submit button
+   *
+   * @returns button text
+   */
   public getSubmitText(): string {
     return !this._libraryService.selectedBook ? 'Create' : 'Submit';
   }
 
+  /**
+   * Get the text to use as the header based on editing state
+   *
+   * @returns header text
+   */
   public getHeaderText(): string {
     if (!this.editing && this.data) return this.data.name;
     return this.data ? `Editing ${this.data.name}` : 'Add New Book';

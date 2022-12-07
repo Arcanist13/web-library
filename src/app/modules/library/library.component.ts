@@ -63,7 +63,12 @@ export class LibraryComponent {
     }
   }
 
-  public handlePageEvent(e: PageEvent) {
+  /**
+   * Handle user page modification events
+   *
+   * @param e page modification
+   */
+  public handlePageEvent(e: PageEvent): void {
     this.length = e.length;
     this.pageSize = e.pageSize;
     localStorage.setItem(STORAGE_KEY_PAGE_SIZE, this.pageSize.toString());
@@ -71,10 +76,21 @@ export class LibraryComponent {
     localStorage.setItem(STORAGE_KEY_PAGE_INDEX, this.pageIndex.toString());
   }
 
+  /**
+   * Get a HTML img compatable book icon string
+   *
+   * @param icon_string image string
+   * @returns           transformed image string
+   */
   public getIcon(icon_string?: string): SafeResourceUrl | string {
     return this._libraryService.getIcon(icon_string);
   }
 
+  /**
+   * Get the list of books, spliced based on the current page view
+   *
+   * @returns list of books on page
+   */
   public get books(): Array<IBook> {
     const startIdx = this.pageIndex * this.pageSize;
     const endIdx = (startIdx + this.pageSize) - 1;
@@ -83,10 +99,12 @@ export class LibraryComponent {
     return fullList.slice(startIdx, endIdx);
   }
 
-  public trackById(index: number, item: IBook): any {
-    return item.id;
-  }
-
+  /**
+   * Confirm dialog for deleting a book
+   *
+   * @param id    book id
+   * @param name  book name
+   */
   public confirmDelete(id: number, name: string): void {
     const msg = `Confirm that you wish to remove ${name} from the library?`;
     const dialogRef = this._dialog.open(ConfirmComponent, { data: msg });
@@ -98,15 +116,39 @@ export class LibraryComponent {
     });
   }
 
+  /**
+   * Create a book
+   */
   public createBook(): void {
     this._libraryService.viewBook(undefined, true);
   }
 
+  /**
+   * Edit a book
+   *
+   * @param book  book to edit
+   */
   public editBook(book: IBook): void {
     this._libraryService.viewBook(book, true);
   }
 
+  /**
+   * View a book
+   *
+   * @param book  book to view
+   */
   public viewBook(book: IBook): void {
     this._libraryService.viewBook(book, false);
+  }
+
+  /**
+   * ngFor id tracker for books
+   *
+   * @param index book index
+   * @param item  book
+   * @returns     book id
+   */
+  public trackById(index: number, item: IBook): number {
+    return item.id;
   }
 }

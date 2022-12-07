@@ -1,12 +1,15 @@
-import os
 import cv2
 import numpy as np
+import base64
 
 class ImageProcessing:
 
-  def process_image(self, image_string, image_width, icon_width):
+  def process_image(self, image_input, image_width, icon_width, b64 = False):
+    '''Process an incoming image and cut out the book cover then return a image and icon string'''
     # Load image
-    img_np = np.fromstring(image_string, np.uint8)
+    if b64:
+      image_input = base64.b64decode(image_input)
+    img_np = np.fromstring(image_input, np.uint8)
     img_cv = cv2.imdecode(img_np, cv2.IMREAD_COLOR)
 
     # Standardise background
@@ -35,25 +38,28 @@ class ImageProcessing:
     # Scale and flip image as required to generate full size image and icon
     flipped = self.ensure_vertical(cropped)
     transformed_full = self.scale_image(flipped, image_width)
-    full_string = cv2.imencode('.jpg', transformed_full)[1]
+    full_string = base64.b64encode(cv2.imencode('.jpg', transformed_full)[1])
 
     transformed_icon = self.scale_image(flipped, icon_width)
-    icon_string = cv2.imencode('.jpg', transformed_icon)[1]
+    icon_string = base64.b64encode(cv2.imencode('.jpg', transformed_icon)[1])
 
     return (full_string, icon_string)
 
   def ensure_vertical(self, img):
+    '''Ensure the image is vertically alligned'''
     if img.shape[0] < img.shape[1]:
       return cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)
     return img
 
   def scale_image(self, img, width):
+    '''Scale the image to the desired width'''
     scale_percent = (width / img.shape[1])
     width = int(img.shape[1] * scale_percent)
     height = int(img.shape[0] * scale_percent)
     return cv2.resize(img, (width, height))
 
   def std_background(self, img):
+    '''Standardize the background reducing noise'''
     myimage_hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 
     #Take S and remove any value that is less than half

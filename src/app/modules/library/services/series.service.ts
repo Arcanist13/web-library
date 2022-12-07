@@ -18,6 +18,9 @@ export class SeriesService {
     });
   }
 
+  /**
+   * Get the list of series
+   */
   public get series(): Array<ISeries> {
     return this._series;
   }

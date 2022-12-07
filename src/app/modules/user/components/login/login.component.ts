@@ -45,6 +45,8 @@ export class LoginComponent {
    *
    * Will redirect to the home page after successful login, or display
    * relevant errors on fail.
+   *
+   * @returns promise for login resolve
    */
   async onSubmit(): Promise<void> {
     this.loginInvalid = false;
@@ -66,7 +68,10 @@ export class LoginComponent {
   }
 
   /**
-   * Form getters
+   * Get a form field object
+   *
+   * @param field field name
+   * @returns     form field
    */
   getField(field: string): AbstractControl | null {
     return this.form.get(field);
