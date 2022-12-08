@@ -1,3 +1,4 @@
+
 CREATE TABLE books (
   id              INTEGER PRIMARY KEY NOT NULL,
   name            TEXT NOT NULL,
@@ -13,8 +14,8 @@ CREATE TABLE books (
 INSERT INTO books VALUES(NULL,'The Fellowship of the Ring','J.R.R. Tolkien','Fantasy','Middle-Earth/Lord of the Rings',1,3,NULL,NULL);
 INSERT INTO books VALUES(NULL,'The Two Towers','J.R.R. Tolkien','Fantasy','Middle-Earth/Lord of the Rings',2,3,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Return of the King','J.R.R. Tolkien','Fantasy','Middle-Earth/Lord of the Rings',3,3,NULL,NULL);
-INSERT INTO books VALUES(NULL,'The History of Middle Earth I','J.R.R. Tolkien/Christopher Tolkien','Fantasy','Middle-Earth/History of Middle-Earth',1,1,NULL,NULL);
-INSERT INTO books VALUES(NULL,'The History of Middle Earth II','J.R.R. Tolkien/Christopher Tolkien','Fantasy','Middle-Earth/History of Middle-Earth',2,2,NULL,NULL);
+INSERT INTO books VALUES(NULL,'The History of Middle Earth I','J.R.R. Tolkien/Christopher Tolkien','Fantasy','Middle-Earth/History of Middle-Earth',1,3,NULL,NULL);
+INSERT INTO books VALUES(NULL,'The History of Middle Earth II','J.R.R. Tolkien/Christopher Tolkien','Fantasy','Middle-Earth/History of Middle-Earth',2,3,NULL,NULL);
 INSERT INTO books VALUES(NULL,'The History of Middle Earth III','J.R.R. Tolkien/Christopher Tolkien','Fantasy','Middle-Earth/History of Middle-Earth',3,3,NULL,NULL);
 INSERT INTO books VALUES(NULL,'The Silmarillion','J.R.R. Tolkien/Christopher Tolkien','Fantasy','Middle-Earth',NULL,NULL,NULL,NULL);
 INSERT INTO books VALUES(NULL,'The Silmarillion','J.R.R. Tolkien/Christopher Tolkien','Fantasy','Middle-Earth',NULL,NULL,NULL,NULL);

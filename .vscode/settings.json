@@ -42,6 +42,12 @@
   "scss.format.enable": true,
   "eslint.format.enable": true,
   "editor.formatOnSaveMode": "file",
+  "[sql]": {
+    "editor.formatOnSave": false
+  },
+  "files.associations": {
+    "*.sql": "sql"
+  },
 
   // PYTHON
   "python.linting.enabled": true,
