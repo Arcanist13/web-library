@@ -50,7 +50,7 @@ export class LibraryService {
     // Load the library icons
     this._httpService.get<Array<IBookIcon>>(`${environment.backendUri}/icons`).subscribe({
       next: (icons: Array<IBookIcon>) => {
-        icons.every((icon: IBookIcon) => this._books[icon.id - 1].image_icon = icon.image_icon);
+        icons.forEach((icon: IBookIcon) => this._books[icon.id - 1].image_icon = icon.image_icon);
       },
       error: () => { this._snackService.openInfoSnack('Failed to fetch books from the backend.'); }
     });
