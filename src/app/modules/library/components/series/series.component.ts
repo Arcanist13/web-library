@@ -3,6 +3,7 @@ import { PageEvent } from '@angular/material/paginator';
 import { Router } from '@angular/router';
 import { HOME_PATH } from 'src/app/static/constants';
 import { ISeries } from 'src/app/static/models/series.model';
+import { ObservableService } from 'src/app/static/services/observable.service';
 import { STORAGE_KEY_SERIES_PAGE_INDEX, STORAGE_KEY_SERIES_PAGE_SIZE } from 'src/app/static/storage_keys.constants';
 import { FilterService } from '../../services/filter.service';
 import { SeriesService } from '../../services/series.service';
@@ -10,7 +11,8 @@ import { SeriesService } from '../../services/series.service';
 @Component({
   selector: 'app-series',
   templateUrl: './series.component.html',
-  styleUrls: ['./series.component.scss']
+  styleUrls: ['./series.component.scss'],
+  providers: [ObservableService]
 })
 export class SeriesComponent {
   // Paginator
@@ -24,11 +26,25 @@ export class SeriesComponent {
   public showFirstLastButtons = true;
   public disabled = false;
 
+  private _seriesList: Array<ISeries>;
+
   constructor(
     private _router: Router,
+    private _observableService: ObservableService,
     private _seriesService: SeriesService,
     private _filterService: FilterService,
   ) {
+    // Load the series
+    this._seriesList = this._seriesService.onSeriesLoaded.value;
+    this._observableService.subscribe(
+      this._seriesService.onSeriesLoaded,
+      () => {
+        this._seriesList = this._filterService.filterSeries(this._seriesService.series);
+        this._seriesList.sort((a, b) => this.seriesProportion(b.series_numbers, b.series_total) - this.seriesProportion(a.series_numbers, a.series_total));
+        this.length = this._seriesList.length;
+      }
+    );
+
     // Load the pagination settings
     const savedPageSize = localStorage.getItem(STORAGE_KEY_SERIES_PAGE_SIZE);
     if (savedPageSize) {
@@ -75,11 +91,7 @@ export class SeriesComponent {
   public get series(): Array<ISeries> {
     const startIdx = this.pageIndex * this.pageSize;
     const endIdx = (startIdx + this.pageSize) - 1;
-    const fullList = this._filterService.filterSeries(this._seriesService.series);
-    this.length = fullList.length;
-    fullList.sort((a, b) => this.seriesProportion(b.series_numbers, b.series_total) - this.seriesProportion(a.series_numbers, a.series_total));
-    // const sorted = fullList.sort((a, b) => this.seriesProportion(b.series_numbers, b.series_total) - this.seriesProportion(a.series_numbers, a.series_total));
-    return fullList.slice(startIdx, endIdx);
+    return this._seriesList.slice(startIdx, endIdx);
   }
 
   /**
@@ -123,6 +135,10 @@ export class SeriesComponent {
    */
   searchChange(searchText: string): void {
     this._filterService.seriesFilter = searchText;
+
+    this._seriesList = this._filterService.filterSeries(this._seriesService.series);
+    this._seriesList.sort((a, b) => this.seriesProportion(b.series_numbers, b.series_total) - this.seriesProportion(a.series_numbers, a.series_total));
+    this.length = this._seriesList.length;
   }
 
   /**

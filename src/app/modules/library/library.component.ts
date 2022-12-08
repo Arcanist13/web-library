@@ -30,6 +30,8 @@ export class LibraryComponent {
   public showFirstLastButtons = true;
   public disabled = false;
 
+  private _bookList: Array<IBook>;
+
   constructor(
     private _observableService: ObservableService,
     private _dialog: MatDialog,
@@ -37,6 +39,16 @@ export class LibraryComponent {
     private _userService: UserService,
     private _filterService: FilterService,
   ) {
+    // Load the books
+    this._bookList = this._libraryService.onBooksLoaded.value;
+    this._observableService.subscribe(
+      this._libraryService.onBooksLoaded,
+      () => {
+        this._bookList = this._filterService.filterBooks(this._libraryService.books);
+        this.length = this._bookList.length;
+      }
+    );
+
     // Subscribe to login state changes (for logout mostly)
     this.loggedIn = this._userService.onLoginStateUpdate.value;
     this._observableService.subscribe(
@@ -94,9 +106,7 @@ export class LibraryComponent {
   public get books(): Array<IBook> {
     const startIdx = this.pageIndex * this.pageSize;
     const endIdx = (startIdx + this.pageSize) - 1;
-    const fullList = this._filterService.filterBooks(this._libraryService.books);
-    this.length = fullList.length;
-    return fullList.slice(startIdx, endIdx);
+    return this._bookList.slice(startIdx, endIdx);
   }
 
   /**
@@ -146,6 +156,9 @@ export class LibraryComponent {
    */
   searchChange(searchText: string): void {
     this._filterService.bookFilter = searchText;
+
+    this._bookList = this._filterService.filterBooks(this._libraryService.books);
+    this.length = this._bookList.length;
   }
 
   /**

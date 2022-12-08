@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 import { SnackService } from 'src/app/shared/services/snack.service';
 import { HOME_PATH } from 'src/app/static/constants';
 import { IBook, IBookIcon } from 'src/app/static/models/book.model';
@@ -20,6 +21,8 @@ export class LibraryService {
   private _selectedBook: IBook | undefined;
   private _editing: boolean;
 
+  private _onBooksLoaded: BehaviorSubject<Array<IBook>> = new BehaviorSubject<Array<IBook>>([]);
+
   constructor(
     private _router: Router,
     private _sanitizer: DomSanitizer,
@@ -34,6 +37,7 @@ export class LibraryService {
     this._httpService.get<Array<IBook>>(`${environment.backendUri}/books`).subscribe({
       next: (books: Array<IBook>) => {
         this._books = books;
+        this._onBooksLoaded.next(this._books);
       },
       error: () => { this._snackService.openInfoSnack('Failed to fetch books from the backend.'); }
     });
@@ -277,5 +281,12 @@ export class LibraryService {
    */
   public set editing(value: boolean) {
     this._editing = value;
+  }
+
+  /**
+   * Get event for when books are loaded
+   */
+  public get onBooksLoaded(): BehaviorSubject<Array<IBook>> {
+    return this._onBooksLoaded;
   }
 }
