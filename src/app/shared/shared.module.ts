@@ -21,6 +21,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 
 import { ConfirmComponent } from './modals/confirm/confirm.component';
 import { NiceKeyStringPipe } from './pipes/nice-key-string.pipe';
+import { SearchComponent } from './components/search/search.component';
 
 const MATERIAL_IMPORTS = [
   MatListModule,
@@ -44,10 +45,13 @@ const SHARED_PIPES = [
   SplitOnSeparatorPipe,
   NiceKeyStringPipe,
 ];
+const SHARED_COMPONENTS = [
+  SearchComponent,
+];
 
 @NgModule({
   declarations: [
-    // ...SHARED_COMPONENTS,
+    ...SHARED_COMPONENTS,
     ...SHARED_PIPES,
     ...SHARED_DIALOG,
   ],
@@ -64,7 +68,7 @@ const SHARED_PIPES = [
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    // ...SHARED_COMPONENTS,
+    ...SHARED_COMPONENTS,
     ...SHARED_PIPES,
     ...MATERIAL_IMPORTS,
     ...SHARED_DIALOG,

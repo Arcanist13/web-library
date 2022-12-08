@@ -1,3 +1,20 @@
+<!-- Search bar -->
+<div class="row mt-3">
+  <div class="col">
+    <app-search searchTitle="Search Series" (filterChanged)="searchChange($event)"></app-search>
+  </div>
+</div>
+
+<!-- Pagination -->
+<div class="row">
+  <mat-paginator #paginator class="w-100" (page)="handlePageEvent($event)" [length]="length" [pageSize]="pageSize"
+    [disabled]="disabled" [showFirstLastButtons]="showFirstLastButtons"
+    [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []" [hidePageSize]="hidePageSize" [pageIndex]="pageIndex"
+    aria-label="Select page">
+  </mat-paginator>
+</div>
+
+<!-- Series list -->
 <mat-list>
   <mat-list-item *ngFor="let serie of series; trackBy: trackBySeries" class="series-select"
     (click)="viewSeries(serie.series_name)">

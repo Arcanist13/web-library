@@ -1,27 +1,54 @@
 import { Injectable } from '@angular/core';
 import { IBook } from 'src/app/static/models/book.model';
+import { ISeries } from 'src/app/static/models/series.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FilterService {
   private _bookFilter: string;
+  private _seriesFilter: string;
 
   constructor() {
     this._bookFilter = '';
+    this._seriesFilter = '';
   }
 
   /**
    * Get the current book filter
    */
-  public get textFilter(): string {
+  public get bookFilter(): string {
     return this._bookFilter;
   }
   /**
    * Set the current book filter
    */
-  public set textFilter(v: string) {
+  public set bookFilter(v: string) {
     this._bookFilter = v.toLowerCase();
+  }
+
+  /**
+   * Get the current book filter
+   */
+  public get seriesFilter(): string {
+    return this._seriesFilter;
+  }
+  /**
+   * Set the current book filter
+   */
+  public set seriesFilter(v: string) {
+    this._seriesFilter = v.toLowerCase();
+  }
+
+  /**
+   * Filter a list of series based on the current series filter
+   *
+   * @param books book list to filter
+   * @returns     filtered list of books
+   */
+  public filterSeries(series: Array<ISeries>): Array<ISeries> {
+    return series.filter((serie) => serie.series_name.toLowerCase().includes(this._seriesFilter) ||
+      serie.authours.toLowerCase().includes(this._seriesFilter));
   }
 
   /**

@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
+import { PageEvent } from '@angular/material/paginator';
 import { Router } from '@angular/router';
 import { HOME_PATH } from 'src/app/static/constants';
 import { ISeries } from 'src/app/static/models/series.model';
+import { STORAGE_KEY_SERIES_PAGE_INDEX, STORAGE_KEY_SERIES_PAGE_SIZE } from 'src/app/static/storage_keys.constants';
 import { FilterService } from '../../services/filter.service';
 import { SeriesService } from '../../services/series.service';
 
@@ -11,11 +13,38 @@ import { SeriesService } from '../../services/series.service';
   styleUrls: ['./series.component.scss']
 })
 export class SeriesComponent {
+  // Paginator
+  public pageSizeOptions = [50, 100, 500];
+  public pageSize = this.pageSizeOptions[0];
+  public pageIndex = 0;
+  public length = 0;
+
+  public hidePageSize = false;
+  public showPageSizeOptions = true;
+  public showFirstLastButtons = true;
+  public disabled = false;
+
   constructor(
     private _router: Router,
     private _seriesService: SeriesService,
     private _filterService: FilterService,
-  ) { }
+  ) {
+    // Load the pagination settings
+    const savedPageSize = localStorage.getItem(STORAGE_KEY_SERIES_PAGE_SIZE);
+    if (savedPageSize) {
+      this.pageSize = +savedPageSize;
+    } else {
+      // set default
+      localStorage.setItem(STORAGE_KEY_SERIES_PAGE_SIZE, this.pageSize.toString());
+    }
+    const savedPageIndex = localStorage.getItem(STORAGE_KEY_SERIES_PAGE_INDEX);
+    if (savedPageIndex) {
+      this.pageIndex = +savedPageIndex;
+    } else {
+      // set default
+      localStorage.setItem(STORAGE_KEY_SERIES_PAGE_INDEX, this.pageIndex.toString());
+    }
+  }
 
   /**
    * Navigate to the book list using the series name as the filter
@@ -23,15 +52,34 @@ export class SeriesComponent {
    * @param name  series name
    */
   public viewSeries(name: string): void {
-    this._filterService.textFilter = name;
+    this._filterService.bookFilter = name;
     this._router.navigate([`/${HOME_PATH}`]);
+  }
+
+  /**
+   * Handle user page modification events
+   *
+   * @param e page modification
+   */
+  public handlePageEvent(e: PageEvent): void {
+    this.length = e.length;
+    this.pageSize = e.pageSize;
+    localStorage.setItem(STORAGE_KEY_SERIES_PAGE_SIZE, this.pageSize.toString());
+    this.pageIndex = e.pageIndex;
+    localStorage.setItem(STORAGE_KEY_SERIES_PAGE_INDEX, this.pageIndex.toString());
   }
 
   /**
    * Get the list of series sorted by completeness
    */
   public get series(): Array<ISeries> {
-    return this._seriesService.series.sort((a, b) => this.seriesProportion(b.series_numbers, b.series_total) - this.seriesProportion(a.series_numbers, a.series_total));
+    const startIdx = this.pageIndex * this.pageSize;
+    const endIdx = (startIdx + this.pageSize) - 1;
+    const fullList = this._filterService.filterSeries(this._seriesService.series);
+    this.length = fullList.length;
+    fullList.sort((a, b) => this.seriesProportion(b.series_numbers, b.series_total) - this.seriesProportion(a.series_numbers, a.series_total));
+    // const sorted = fullList.sort((a, b) => this.seriesProportion(b.series_numbers, b.series_total) - this.seriesProportion(a.series_numbers, a.series_total));
+    return fullList.slice(startIdx, endIdx);
   }
 
   /**
@@ -68,6 +116,13 @@ export class SeriesComponent {
     const proportion = this.seriesProportion(owned, total);
     if (proportion === 1) return 'text-success';
     return proportion > 0.4 ? 'text-warning' : 'text-danger';
+  }
+
+  /**
+   * Notify of a new filter
+   */
+  searchChange(searchText: string): void {
+    this._filterService.seriesFilter = searchText;
   }
 
   /**

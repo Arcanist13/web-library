@@ -1,7 +1,0 @@
-<mat-form-field class="search-form-field" appearance="fill">
-  <mat-label>Search Books</mat-label>
-  <input matInput type="text" [(ngModel)]="searchText" (change)="searchChange()">
-  <button *ngIf="searchText" matSuffix mat-icon-button aria-label="Clear" (click)="searchClear()">
-    <mat-icon>close</mat-icon>
-  </button>
-</mat-form-field>

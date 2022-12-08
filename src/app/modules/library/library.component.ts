@@ -5,7 +5,7 @@ import { SafeResourceUrl } from '@angular/platform-browser';
 import { ConfirmComponent } from 'src/app/shared/modals/confirm/confirm.component';
 import { IBook } from 'src/app/static/models/book.model';
 import { ObservableService } from 'src/app/static/services/observable.service';
-import { STORAGE_KEY_PAGE_INDEX, STORAGE_KEY_PAGE_SIZE } from 'src/app/static/storage_keys.constants';
+import { STORAGE_KEY_BOOKS_PAGE_INDEX, STORAGE_KEY_BOOKS_PAGE_SIZE } from 'src/app/static/storage_keys.constants';
 import { UserService } from '../user/services/user.service';
 import { FilterService } from './services/filter.service';
 import { LibraryService } from './services/library.service';
@@ -47,19 +47,19 @@ export class LibraryComponent {
     );
 
     // Load the pagination settings
-    const savedPageSize = localStorage.getItem(STORAGE_KEY_PAGE_SIZE);
+    const savedPageSize = localStorage.getItem(STORAGE_KEY_BOOKS_PAGE_SIZE);
     if (savedPageSize) {
       this.pageSize = +savedPageSize;
     } else {
       // set default
-      localStorage.setItem(STORAGE_KEY_PAGE_SIZE, this.pageSize.toString());
+      localStorage.setItem(STORAGE_KEY_BOOKS_PAGE_SIZE, this.pageSize.toString());
     }
-    const savedPageIndex = localStorage.getItem(STORAGE_KEY_PAGE_INDEX);
+    const savedPageIndex = localStorage.getItem(STORAGE_KEY_BOOKS_PAGE_INDEX);
     if (savedPageIndex) {
       this.pageIndex = +savedPageIndex;
     } else {
       // set default
-      localStorage.setItem(STORAGE_KEY_PAGE_INDEX, this.pageIndex.toString());
+      localStorage.setItem(STORAGE_KEY_BOOKS_PAGE_INDEX, this.pageIndex.toString());
     }
   }
 
@@ -71,9 +71,9 @@ export class LibraryComponent {
   public handlePageEvent(e: PageEvent): void {
     this.length = e.length;
     this.pageSize = e.pageSize;
-    localStorage.setItem(STORAGE_KEY_PAGE_SIZE, this.pageSize.toString());
+    localStorage.setItem(STORAGE_KEY_BOOKS_PAGE_SIZE, this.pageSize.toString());
     this.pageIndex = e.pageIndex;
-    localStorage.setItem(STORAGE_KEY_PAGE_INDEX, this.pageIndex.toString());
+    localStorage.setItem(STORAGE_KEY_BOOKS_PAGE_INDEX, this.pageIndex.toString());
   }
 
   /**
@@ -139,6 +139,13 @@ export class LibraryComponent {
    */
   public viewBook(book: IBook): void {
     this._libraryService.viewBook(book, false);
+  }
+
+  /**
+   * Notify of a new filter
+   */
+  searchChange(searchText: string): void {
+    this._filterService.bookFilter = searchText;
   }
 
   /**
