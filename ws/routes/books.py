@@ -23,7 +23,7 @@ async def get_all_books():
 @router.get('/icons', response_model=Optional[List[BookIcon]], tags=["book"])
 async def get_all_icons():
   '''Get all icons.'''
-  icons = get_db_all("SELECT id, image_icon FROM books")
+  icons = get_db_all("SELECT id, image_icon FROM books ORDER BY id ASC")
   return icons
 
 @router.get('/book/{book_id}', response_model=Optional[Book], tags=["book"])

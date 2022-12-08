@@ -151,6 +151,7 @@ export class LibraryService {
         next: () => {
           this._snackService.openInfoSnack(`Sucessfully deleted ${name}.`);
           this._books = this._books.filter((book: IBook) => book.id !== id);
+          this._onBooksLoaded.next(this._books);
         },
         error: () => { this._snackService.openInfoSnack('Failed to delete the book.'); }
       });
