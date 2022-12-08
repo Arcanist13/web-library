@@ -1,7 +1,8 @@
 <!-- Search bar -->
 <div class="row mt-3">
   <div class="col">
-    <app-search searchTitle="Search Books" (filterChanged)="searchChange($event)"></app-search>
+    <app-search searchTitle="Search Books" [searchFilter]="filterText" (filterChanged)="searchChange($event)">
+    </app-search>
   </div>
   <div *ngIf="loggedIn" class="col-auto">
     <button mat-fab class="book-button" color="success" (click)="createBook()" matTooltip="Add"

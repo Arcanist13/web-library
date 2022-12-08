@@ -1,7 +1,7 @@
 <mat-form-field class="search-form-field" appearance="fill">
   <mat-label>{{ searchTitle ? searchTitle : '' }}</mat-label>
-  <input matInput type="text" [(ngModel)]="filter" (change)="filterChange()">
-  <button *ngIf="filter" matSuffix mat-icon-button aria-label="Clear" (click)="filterClear()">
+  <input matInput type="text" [(ngModel)]="searchFilter" (change)="filterChange()">
+  <button *ngIf="searchFilter" matSuffix mat-icon-button aria-label="Clear" (click)="filterClear()">
     <mat-icon>close</mat-icon>
   </button>
 </mat-form-field>

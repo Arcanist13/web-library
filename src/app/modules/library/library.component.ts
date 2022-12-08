@@ -162,6 +162,15 @@ export class LibraryComponent {
   }
 
   /**
+   * Load the filter text
+   *
+   * @returns filter text
+   */
+  public get filterText(): string {
+    return this._filterService.bookFilter;
+  }
+
+  /**
    * ngFor id tracker for books
    *
    * @param index book index
