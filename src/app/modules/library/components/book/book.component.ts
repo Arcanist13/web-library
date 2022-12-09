@@ -5,7 +5,7 @@ import { map, Observable, startWith } from 'rxjs';
 import { UserService } from 'src/app/modules/user/services/user.service';
 import { SnackService } from 'src/app/shared/services/snack.service';
 import { HOME_PATH } from 'src/app/static/constants';
-import { IBook } from 'src/app/static/models/book.model';
+import { IBook, IBookImage } from 'src/app/static/models/book.model';
 import { ObservableService } from 'src/app/static/services/observable.service';
 import { LibraryService } from '../../services/library.service';
 
@@ -58,9 +58,8 @@ export class BookComponent {
 
     // Load missing data
     if (this.data) {
-      this._libraryService.getBook(this.data.id).then((fullBook: IBook) => {
-        this.form.get('series_number')?.setValue(fullBook.series_number);
-        this.form.get('series_total')?.setValue(fullBook.series_total);
+      this._libraryService.getBookImage(this.data.id).then((fullBook: IBookImage) => {
+        // Do things with the image
       });
     }
 

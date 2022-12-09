@@ -18,6 +18,10 @@ class BookIcon(BaseModel):
   id:               int
   image_icon:       Optional[str] = None
 
+class BookImage(BaseModel):
+  '''Book image model'''
+  image_full:       Optional[str] = None
+
 class NewBook(BaseModel):
   '''New book model (excluding id)'''
   name:             str

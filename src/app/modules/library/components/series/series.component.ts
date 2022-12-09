@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { HOME_PATH } from 'src/app/static/constants';
 import { ISeries } from 'src/app/static/models/series.model';
 import { ObservableService } from 'src/app/static/services/observable.service';
-import { STORAGE_KEY_SERIES_PAGE_INDEX, STORAGE_KEY_SERIES_PAGE_SIZE } from 'src/app/static/storage_keys.constants';
+import { STORAGE_KEY_BOOKS_PAGE_INDEX, STORAGE_KEY_SERIES_PAGE_INDEX, STORAGE_KEY_SERIES_PAGE_SIZE } from 'src/app/static/storage_keys.constants';
 import { FilterService } from '../../services/filter.service';
 import { SeriesService } from '../../services/series.service';
 
@@ -16,7 +16,7 @@ import { SeriesService } from '../../services/series.service';
 })
 export class SeriesComponent {
   // Paginator
-  public pageSizeOptions = [50, 100, 500];
+  public pageSizeOptions = [20, 50, 100];
   public pageSize = this.pageSizeOptions[0];
   public pageIndex = 0;
   public length = 0;
@@ -47,14 +47,14 @@ export class SeriesComponent {
 
     // Load the pagination settings
     const savedPageSize = localStorage.getItem(STORAGE_KEY_SERIES_PAGE_SIZE);
-    if (savedPageSize) {
+    if (savedPageSize !== null) {
       this.pageSize = +savedPageSize;
     } else {
       // set default
       localStorage.setItem(STORAGE_KEY_SERIES_PAGE_SIZE, this.pageSize.toString());
     }
     const savedPageIndex = localStorage.getItem(STORAGE_KEY_SERIES_PAGE_INDEX);
-    if (savedPageIndex) {
+    if (savedPageIndex !== null) {
       this.pageIndex = +savedPageIndex;
     } else {
       // set default
@@ -69,6 +69,7 @@ export class SeriesComponent {
    */
   public viewSeries(name: string): void {
     this._filterService.bookFilter = name;
+    localStorage.setItem(STORAGE_KEY_BOOKS_PAGE_INDEX, (0).toString());
     this._router.navigate([`/${HOME_PATH}`]);
   }
 
@@ -102,7 +103,7 @@ export class SeriesComponent {
    * @returns     proportion of books owned
    */
   public seriesProportion(owned: string, total: number): number {
-    return owned.split(',').length / total;
+    return this._seriesService.seriesProportion(owned, total);
   }
 
   /**
@@ -113,8 +114,7 @@ export class SeriesComponent {
    * @returns     list of books as indexes (e.g. "1 2 X X 5 6")
    */
   public fillSeriesGaps(owned: string, total: number): Array<string> {
-    const split = owned.split(',');
-    return [...Array(total).fill('X').map((val, idx) => (split.includes((idx + 1).toString()) ? (idx + 1).toString() : 'X'))];
+    return this._seriesService.fillSeriesGaps(owned, total);
   }
 
   /**

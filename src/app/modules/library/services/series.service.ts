@@ -27,6 +27,29 @@ export class SeriesService {
   }
 
   /**
+   * Calculate how complete the series is
+   *
+   * @param owned csv list of book indexes
+   * @param total total books in the series
+   * @returns     proportion of books owned
+   */
+  public seriesProportion(owned: string, total: number): number {
+    return owned.split(',').length / total;
+  }
+
+  /**
+   * Create a string list of books owned and missing, missing books are filled as 'X' in the list
+   *
+   * @param owned csv list of book indexes
+   * @param total total number of books
+   * @returns     list of books as indexes (e.g. "1 2 X X 5 6")
+   */
+  public fillSeriesGaps(owned: string, total: number): Array<string> {
+    const split = owned.split(',');
+    return [...Array(total).fill('X').map((val, idx) => (split.includes((idx + 1).toString()) ? (idx + 1).toString() : 'X'))];
+  }
+
+  /**
    * Get the list of series
    */
   public get series(): Array<ISeries> {

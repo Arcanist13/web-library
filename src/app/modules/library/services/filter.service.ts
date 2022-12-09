@@ -24,7 +24,7 @@ export class FilterService {
    * Set the current book filter
    */
   public set bookFilter(v: string) {
-    this._bookFilter = v.toLowerCase();
+    this._bookFilter = v;
   }
 
   /**
@@ -37,7 +37,7 @@ export class FilterService {
    * Set the current book filter
    */
   public set seriesFilter(v: string) {
-    this._seriesFilter = v.toLowerCase();
+    this._seriesFilter = v;
   }
 
   /**
@@ -47,8 +47,9 @@ export class FilterService {
    * @returns     filtered list of books
    */
   public filterSeries(series: Array<ISeries>): Array<ISeries> {
-    return series.filter((serie) => serie.series_name.toLowerCase().includes(this._seriesFilter) ||
-      serie.authours.toLowerCase().includes(this._seriesFilter));
+    const seriesFilter = this._seriesFilter.toLowerCase();
+    return series.filter((serie) => serie.series_name.toLowerCase().includes(seriesFilter) ||
+      serie.authours.toLowerCase().includes(seriesFilter));
   }
 
   /**
@@ -58,8 +59,9 @@ export class FilterService {
    * @returns     filtered list of books
    */
   public filterBooks(books: Array<IBook>): Array<IBook> {
-    return books.filter((book) => book.name.toLowerCase().includes(this._bookFilter) ||
-      book.authour.toLowerCase().includes(this._bookFilter) ||
-      book.series_name?.toLowerCase().includes(this._bookFilter));
+    const bookFilter = this._bookFilter.toLowerCase();
+    return books.filter((book) => book.name.toLowerCase().includes(bookFilter) ||
+      book.authour.toLowerCase().includes(bookFilter) ||
+      book.series_name?.toLowerCase().includes(bookFilter));
   }
 }

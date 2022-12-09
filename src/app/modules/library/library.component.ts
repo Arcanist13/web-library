@@ -20,7 +20,7 @@ export class LibraryComponent {
   public loggedIn: boolean;
 
   // Paginator
-  public pageSizeOptions = [50, 100, 500];
+  public pageSizeOptions = [20, 50, 100];
   public pageSize = this.pageSizeOptions[0];
   public pageIndex = 0;
   public length = 0;
@@ -60,14 +60,14 @@ export class LibraryComponent {
 
     // Load the pagination settings
     const savedPageSize = localStorage.getItem(STORAGE_KEY_BOOKS_PAGE_SIZE);
-    if (savedPageSize) {
+    if (savedPageSize !== null) {
       this.pageSize = +savedPageSize;
     } else {
       // set default
       localStorage.setItem(STORAGE_KEY_BOOKS_PAGE_SIZE, this.pageSize.toString());
     }
     const savedPageIndex = localStorage.getItem(STORAGE_KEY_BOOKS_PAGE_INDEX);
-    if (savedPageIndex) {
+    if (savedPageIndex !== null) {
       this.pageIndex = +savedPageIndex;
     } else {
       // set default

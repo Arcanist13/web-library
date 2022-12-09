@@ -38,6 +38,14 @@ export class LibraryService {
       next: (books: Array<IBook>) => {
         this._books = books;
         this._onBooksLoaded.next(this._books);
+
+        // Load the library icons
+        this._httpService.get<Array<IBookIcon>>(`${environment.backendUri}/icons`).subscribe({
+          next: (icons: Array<IBookIcon>) => {
+            icons.forEach((icon: IBookIcon) => this._books[icon.id - 1].image_icon = icon.image_icon);
+          },
+          error: () => { this._snackService.openInfoSnack('Failed to fetch books from the backend.'); }
+        });
       },
       error: () => { this._snackService.openInfoSnack('Failed to fetch books from the backend.'); }
     });
@@ -46,14 +54,6 @@ export class LibraryService {
     this.getAuthours();
     this.getSeriesNames();
     this.getGenres();
-
-    // Load the library icons
-    this._httpService.get<Array<IBookIcon>>(`${environment.backendUri}/icons`).subscribe({
-      next: (icons: Array<IBookIcon>) => {
-        icons.forEach((icon: IBookIcon) => this._books[icon.id - 1].image_icon = icon.image_icon);
-      },
-      error: () => { this._snackService.openInfoSnack('Failed to fetch books from the backend.'); }
-    });
   }
 
   /**
@@ -62,9 +62,9 @@ export class LibraryService {
    * @param id  book id
    * @returns   book
    */
-  public getBook(id: number): Promise<IBook> {
+  public getBookImage(id: number): Promise<IBook> {
     return new Promise((resolve, reject) => {
-      this._httpService.get<IBook>(`${environment.backendUri}/book/${id}`).subscribe({
+      this._httpService.get<IBook>(`${environment.backendUri}/book/image/${id}`).subscribe({
         next: (book: IBook) => {
           resolve(book);
         },

@@ -7,7 +7,7 @@ from database.sqlite3 import delete_id, execute, get_db_all, get_db_one
 
 from auth.auth import get_current_user
 from models.user_model import User
-from models.book import Book, NewBook, BookIcon
+from models.book import Book, NewBook, BookIcon, BookImage
 from image.image import ImageProcessing
 
 router = APIRouter()
@@ -17,7 +17,7 @@ imageProcessing = ImageProcessing()
 @router.get('/books', response_model=Optional[List[Book]], tags=["book"])
 async def get_all_books():
   '''Get all books'''
-  books = get_db_all("SELECT id, name, authour, genres, series_name FROM books ORDER BY id ASC")
+  books = get_db_all("SELECT id, name, authour, genres, series_name, series_number, series_total FROM books ORDER BY id ASC")
   return books
 
 @router.get('/icons', response_model=Optional[List[BookIcon]], tags=["book"])
@@ -26,10 +26,10 @@ async def get_all_icons():
   icons = get_db_all("SELECT id, image_icon FROM books ORDER BY id ASC")
   return icons
 
-@router.get('/book/{book_id}', response_model=Optional[Book], tags=["book"])
+@router.get('/book/image/{book_id}', response_model=Optional[BookImage], tags=["book"])
 async def get_book(book_id: int):
   '''Get a specific book'''
-  book = get_db_one("SELECT * FROM books WHERE id = ? ORDER BY id ASC", [book_id])
+  book = get_db_one("SELECT image_full FROM books WHERE id = ? ORDER BY id ASC", [book_id])
   return book
 
 @router.delete("/book/remove/{book_id}", tags=["book"])

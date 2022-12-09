@@ -20,3 +20,11 @@ export interface IBookIcon {
   id: number;
   image_icon?: string;
 }
+
+/**
+ * Book image model
+ */
+export interface IBookImage {
+  id: number;
+  image_full?: string;
+}
