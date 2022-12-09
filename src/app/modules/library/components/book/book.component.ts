@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { map, Observable, startWith } from 'rxjs';
 import { UserService } from 'src/app/modules/user/services/user.service';
+import { ConfirmComponent } from 'src/app/shared/modals/confirm/confirm.component';
 import { SnackService } from 'src/app/shared/services/snack.service';
 import { HOME_PATH } from 'src/app/static/constants';
 import { IBook, IBookImage } from 'src/app/static/models/book.model';
@@ -30,6 +32,7 @@ export class BookComponent {
   constructor(
     private _observableService: ObservableService,
     private _router: Router,
+    private _dialog: MatDialog,
     private _libraryService: LibraryService,
     private _userService: UserService,
     private _snackService: SnackService,
@@ -205,6 +208,30 @@ export class BookComponent {
 
     this.editing = true;
     this.form.enable();
+  }
+
+  /**
+   * Confirm dialog for deleting a book
+   *
+   * @param id    book id
+   * @param name  book name
+   */
+  public confirmDelete(): void {
+    const id = this.data?.id;
+    const name = this.form.get('name')?.value;
+
+    if (id !== undefined && name !== undefined) {
+      const msg = `Confirm that you wish to remove ${name} from the library?`;
+      const dialogRef = this._dialog.open(ConfirmComponent, { data: msg });
+
+      dialogRef.afterClosed().subscribe((res: boolean) => {
+        if (res) {
+          this._libraryService.deleteBook(id, name);
+        }
+      });
+    } else {
+      this._snackService.openInfoSnack('Failed to remove book.');
+    }
   }
 
   /**

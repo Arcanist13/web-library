@@ -35,7 +35,7 @@
       </div>
 
       <!-- Admin options -->
-      <div *ngIf="loggedIn" class="col-auto">
+      <div *ngIf="loggedIn" class="col-auto d-none d-md-block">
         <button mat-fab class="book-button" color="general" (click)="editBook(book)" matTooltip="Edit"
           aria-label="Button that switches to edit book mode">
           <mat-icon>edit_note</mat-icon>

@@ -2,16 +2,22 @@
   <mat-card-content>
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <!-- Title -->
-      <h2>
-        {{ getHeaderText() }}
-        <button *ngIf="!editing && loggedIn" mat-mini-fab class="edit-button ms-3" color="general" (click)="editBook()"
-          matTooltip="Edit" aria-label="Button that switches to edit book mode">
-          <mat-icon>edit_note</mat-icon>
-        </button>
-      </h2>
+      <h2>{{ getHeaderText() }}</h2>
       <mat-error *ngIf="formInvalid" class="mb-2">
         There is an error within the form.
       </mat-error>
+
+      <!-- Admin options -->
+      <div *ngIf="loggedIn && !editing">
+        <button mat-fab class="book-button" color="general" (click)="editBook()" matTooltip="Edit"
+          aria-label="Button that switches to edit book mode">
+          <mat-icon>edit_note</mat-icon>
+        </button>
+        <button mat-fab class="book-button" color="danger" (click)="confirmDelete()"
+          matTooltip="Delete" aria-label="Button that deletes the book" aria-label="Delete book button">
+          <mat-icon>delete_forever</mat-icon>
+        </button>
+      </div>
 
       <!-- Form fields -->
       <mat-form-field *ngFor="let key of getFormKeys()" class="full-width-input mb-2">
