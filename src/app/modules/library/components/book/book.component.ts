@@ -7,7 +7,7 @@ import { UserService } from 'src/app/modules/user/services/user.service';
 import { ConfirmComponent } from 'src/app/shared/modals/confirm/confirm.component';
 import { SnackService } from 'src/app/shared/services/snack.service';
 import { HOME_PATH } from 'src/app/static/constants';
-import { IBook, IBookImage } from 'src/app/static/models/book.model';
+import { IBook, IBookImage, IBookImageProcessed } from 'src/app/static/models/book.model';
 import { ObservableService } from 'src/app/static/services/observable.service';
 import { LibraryService } from '../../services/library.service';
 
@@ -61,8 +61,11 @@ export class BookComponent {
 
     // Load missing data
     if (this.data) {
-      this._libraryService.getBookImage(this.data.id).then((fullBook: IBookImage) => {
+      this._libraryService.getBookImage(this.data.id).then((image: IBookImage) => {
         // Do things with the image
+        if (this.data) {
+          this.data.image_full = image.image_full;
+        }
       });
     }
 
@@ -131,6 +134,8 @@ export class BookComponent {
         const series_name = this.form.get('series_name')?.value;
         const series_number = this.form.get('series_number')?.value;
         const series_total = this.form.get('series_total')?.value;
+        const image_full = this.data ? this.data.image_full : undefined;
+        const image_icon = this.data ? this.data.image_icon : undefined;
 
         const book = {
           id: this.data ? this.data.id : undefined,
@@ -140,8 +145,8 @@ export class BookComponent {
           series_name: series_name ? series_name : undefined,
           series_number: series_number ? +series_number : undefined,
           series_total: series_total ? +series_total : undefined,
-          image_full: undefined,
-          image_icon: undefined
+          image_full,
+          image_icon
         } as (IBook);
 
         if (this.editing && this.data) {
@@ -152,6 +157,26 @@ export class BookComponent {
       } catch (err) {
         this.formInvalid = true;
       }
+    }
+  }
+
+  /**
+   * Upload a file and get the image strings
+   *
+   * @param file  file to process
+   */
+  public fileUpload(file?: File): void {
+    console.log('File upload!');
+    console.log(file);
+    if (file) {
+      this._libraryService.processImage(file).then((res: IBookImageProcessed) => {
+        if (this.data) {
+          this.data.image_full = res.image_full;
+          this.data.image_icon = res.image_icon;
+        }
+      });
+    } else {
+      this._snackService.openInfoSnack('Failed to find a valid image file.');
     }
   }
 

@@ -3,6 +3,7 @@ secrets.py
 
 # DBs
 *.db
+*.sqlite
 
 # Misc
 .vscode/

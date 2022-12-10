@@ -28,3 +28,11 @@ export interface IBookImage {
   id: number;
   image_full?: string;
 }
+
+/**
+ * Book images processed
+ */
+export interface IBookImageProcessed {
+  image_full: string;
+  image_icon: string;
+}

@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { SnackService } from 'src/app/shared/services/snack.service';
 import { HOME_PATH } from 'src/app/static/constants';
-import { IBook, IBookIcon } from 'src/app/static/models/book.model';
+import { IBook, IBookIcon, IBookImageProcessed } from 'src/app/static/models/book.model';
 import { HttpService } from 'src/app/static/services/http.service';
 import { environment } from 'src/environments/environment';
 import { UserService } from '../../user/services/user.service';
@@ -158,6 +158,25 @@ export class LibraryService {
     } else {
       this._snackService.openInfoSnack('Must be logged in to delete a book.');
     }
+  }
+
+  /**
+   * Process and image and return and array of strings containing the full image and the icon image
+   *
+   * @param buffer  image buffer
+   * @returns       image string array [full, icon]
+   */
+  public processImage(file: File): Promise<IBookImageProcessed> {
+    return new Promise((resolve, reject) => {
+      const formData = new FormData();
+      formData.append('image', file, file.name);
+      this._httpService.post<IBookImageProcessed>(`${environment.backendUri}/book/image`, formData).subscribe({
+        next: (images: IBookImageProcessed) => {
+          resolve(images);
+        },
+        error: () => { this._snackService.openInfoSnack('Failed to process the image.'); reject(); }
+      });
+    });
   }
 
   public getIcon(icon_string?: string): SafeResourceUrl | string {

@@ -32,9 +32,31 @@
         </mat-autocomplete>
       </mat-form-field>
 
-      <button type="button" *ngIf="editing" mat-raised-button color="basic" (click)="close()"
-        class="me-2">Cancel</button>
-      <button *ngIf="editing" mat-raised-button color="general">{{ getSubmitText() }}</button>
+      <div>
+        <button type="button" *ngIf="editing" mat-raised-button color="basic" (click)="close()"
+          class="me-2">Cancel</button>
+        <button *ngIf="editing" mat-raised-button color="general" type="submit">{{ getSubmitText() }}</button>
+      </div>
+
+      <div class="mt-3">
+        <div class="fit-content d-flex align-items-center justify-content-center" *ngIf="(!!data?.image_full)">
+          <img [src]="'data:image/jpg;base64,'+data?.image_full" class="img-fluid rounded" alt="Book cover image">
+
+          <!-- Edit existing image -->
+          <label *ngIf="editing" for="file-upload" class="float-button">
+            <a mat-mini-fab color="general" aria-label="Button to change the book cover image">
+              <mat-icon>edit</mat-icon>
+            </a>
+          </label>
+          <input *ngIf="editing" class="d-none" id="file-upload" type="file" accept="image/*" capture="environment" (change)="fileUpload($any($event.target).files[0])">
+        </div>
+      </div>
+      <!-- Upload initial image -->
+      <div class="mt-3" *ngIf="editing && (!data?.image_full)">
+        <ngx-dropzone (change)="fileUpload($event.addedFiles[0])" [multiple]="false" type="file" accept="image/*">
+          <ngx-dropzone-label>No cover image, add new.</ngx-dropzone-label>
+        </ngx-dropzone>
+      </div>
     </form>
   </mat-card-content>
 </mat-card>

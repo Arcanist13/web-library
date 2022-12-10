@@ -1,7 +1,7 @@
 '''Routes for characters.'''
 
 from typing import List, Optional
-from fastapi import APIRouter, HTTPException, Depends
+from fastapi import APIRouter, HTTPException, Depends, UploadFile
 
 from database.sqlite3 import delete_id, execute, get_db_all, get_db_one
 
@@ -74,3 +74,15 @@ async def add_book(book: NewBook, user: User = Depends(get_current_user)):
   else:
     raise HTTPException(status_code=500, detail='Cannot add book')
   return get_db_one('SELECT * FROM books ORDER BY id DESC LIMIT 1')
+
+@router.post("/book/image", tags=["book"])
+async def process_image(image: UploadFile, user: User = Depends(get_current_user)):
+  '''Process the images and return the full image and icon'''
+  if image is not None and user is not None:
+    try:
+      (img, ico) = imageProcessing.process_image(image.file.read(), 400, 60)
+      if img is not None and ico is not None:
+        return {"image_full": img, "image_icon": ico}
+      raise HTTPException(status_code=500, detail='Image processing did not return a result')
+    except:
+      raise HTTPException(status_code=500, detail='Image processing failed')

@@ -33,3 +33,16 @@ h2 {
   background-color: #dc3545;
   color: #fff;
 }
+
+.fit-content {
+  position: relative;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.float-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
