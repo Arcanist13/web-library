@@ -48,7 +48,7 @@ class ImageProcessing:
   def ensure_vertical(self, img):
     '''Ensure the image is vertically alligned'''
     if img.shape[0] < img.shape[1]:
-      return cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)
+      return cv2.rotate(img, cv2.ROTATE_90_COUNTERCLOCKWISE)
     return img
 
   def scale_image(self, img, width):

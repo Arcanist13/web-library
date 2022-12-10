@@ -36,14 +36,10 @@ INSERT INTO books VALUES(NULL,'The Fall of Arthur','J.R.R. Tolkien/Christopher T
 INSERT INTO books VALUES(NULL,'The Fall of Gondolin','J.R.R. Tolkien/Christopher Tolkien','Fantasy','Middle-Earth',NULL,NULL,NULL,NULL);
 INSERT INTO books VALUES(NULL,'A Tolkien Bestiary','David Day','Nonfiction','Middle-Earth',NULL,NULL,NULL,NULL);
 INSERT INTO books VALUES(NULL,'The Lord of the Rings: Weapons and Warfare','Chris Smith','Nonfiction','Middle-Earth',NULL,NULL,NULL,NULL);
-
 INSERT INTO books VALUES(NULL,'The Stolen Throne','David Gaider','Fantasy','Dragon Age',1,6,NULL,NULL);
 INSERT INTO books VALUES(NULL,'The Calling','David Gaider','Fantasy','Dragon Age',2,6,NULL,NULL);
-
 INSERT INTO books VALUES(NULL,'The Last Wish','Andrzej Sapkowski','Fantasy','The Witcher',NULL,NULL,NULL,NULL);
-
 INSERT INTO books VALUES(NULL,'Before the Storm','Christie Golden','Fantasy','World of Warcraft',15,18,NULL,NULL);
-
 INSERT INTO books VALUES(NULL,'First King of Shannara','Terry Brooks','Fantasy','Shannara',NULL,NULL,NULL,NULL);
 INSERT INTO books VALUES(NULL,'The Sword of Shannara','Terry Brooks','Fantasy','Shannara/The Sword of Shannara',1,3,NULL,NULL);
 INSERT INTO books VALUES(NULL,'The Elfstones of Shannara','Terry Brooks','Fantasy','Shannara/The Sword of Shannara',2,3,NULL,NULL);
@@ -56,14 +52,12 @@ INSERT INTO books VALUES(NULL,'Ilse Witch','Terry Brooks','Fantasy','Shannara/Th
 INSERT INTO books VALUES(NULL,'Wards of Faerie','Terry Brooks','Fantasy','Shannara/The Dark Legacy of Shannara',1,3,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Bloodfire Quest','Terry Brooks','Fantasy','Shannara/The Dark Legacy of Shannara',2,3,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Witch Wraith','Terry Brooks','Fantasy','Shannara/The Dark Legacy of Shannara',3,3,NULL,NULL);
-
 INSERT INTO books VALUES(NULL,'The Field Guide','Tony DiTrelizzi/Holly Black','Fantasy/Children''s','The Spiderwick Chronicles',1,5,NULL,NULL);
 INSERT INTO books VALUES(NULL,'The Seeing Stone','Tony DiTrelizzi/Holly Black','Fantasy/Children''s','The Spiderwick Chronicles',2,5,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Lucinda''s Secret','Tony DiTrelizzi/Holly Black','Fantasy/Children''s','The Spiderwick Chronicles',3,5,NULL,NULL);
 INSERT INTO books VALUES(NULL,'The Ironwood Tree','Tony DiTrelizzi/Holly Black','Fantasy/Children''s','The Spiderwick Chronicles',4,5,NULL,NULL);
 INSERT INTO books VALUES(NULL,'The Wrath of Mulgarath','Tony DiTrelizzi/Holly Black','Fantasy/Children''s','The Spiderwick Chronicles',5,5,NULL,NULL);
 INSERT INTO books VALUES(NULL,'The Nixie''s Song','Tony DiTrelizzi/Holly Black','Fantasy/Children''s','Beyond The Spiderwick Chronicles',1,3,NULL,NULL);
-
 INSERT INTO books VALUES(NULL,'The Lightning Thief','Rick Riordan','Fantasy/Young Adult/Mythology','Percy Jackson & the Olympians',1,5,NULL,NULL);
 INSERT INTO books VALUES(NULL,'The Sea of Monsters','Rick Riordan','Fantasy/Young Adult/Mythology','Percy Jackson & the Olympians',2,5,NULL,NULL);
 INSERT INTO books VALUES(NULL,'The Titan''s Curse','Rick Riordan','Fantasy/Young Adult/Mythology','Percy Jackson & the Olympians',3,5,NULL,NULL);
@@ -73,13 +67,10 @@ INSERT INTO books VALUES(NULL,'The Greek Gods','Rick Riordan','Fantasy/Young Adu
 INSERT INTO books VALUES(NULL,'The Lost Hero','Rick Riordan','Fantasy/Young Adult/Mythology','The Heroes of Olympus',1,5,NULL,NULL);
 INSERT INTO books VALUES(NULL,'The Son of Neptune','Rick Riordan','Fantasy/Young Adult/Mythology','The Heroes of Olympus',2,5,NULL,NULL);
 INSERT INTO books VALUES(NULL,'The Red Pyramid','Rick Riordan','Fantasy/Young Adult/Mythology','The Kane Chronicles',1,3,NULL,NULL);
-
 INSERT INTO books VALUES(NULL,'Sea of Death','Gary Gygax','Fantasy','Gord the Rogue',1,5,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Night Arrant','Gary Gygax','Fantasy','Gord the Rogue',2,5,NULL,NULL);
-
 INSERT INTO books VALUES(NULL,'Wyrd Sisters','Terry Pratchett','Fantasy','Discworld/Witches',2,6,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Lords and Ladies','Terry Pratchett','Fantasy','Discworld/Witches',4,6,NULL,NULL);
-
 INSERT INTO books VALUES(NULL,'Test of the Twins','Margaret Weis/Tracy Hickman','Fantasy','DragonLance/Legends',3,3,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Theros Ironfeld','Don Perrin','Fantasy','DragonLance/The Warriors',4,7,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Conundrum','Jeff Crook','Fantasy','DragonLance/Age of Mortals',1,6,NULL,NULL);
@@ -104,23 +95,19 @@ INSERT INTO books VALUES(NULL,'Dragons of a Spring Dawning','Margaret Weis/Tracy
 INSERT INTO books VALUES(NULL,'Dragons of a Summer Flame','Margaret Weis/Tracy Hickman','Fantasy','DragonLance/The Chronicles',4,4,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Dragons of a Fallen Sun','Margaret Weis/Tracy Hickman','Fantasy','DragonLance/The War of Souls',1,3,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Dragons of a Vanished Moon','Margaret Weis/Tracy Hickman','Fantasy','DragonLance/The War of Souls',3,3,NULL,NULL);
-
 INSERT INTO books VALUES(NULL,'Wizard''s First Rule','Terry Goodkind','Fantasy','Sword of Truth',3,17,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Stone of Tears','Terry Goodkind','Fantasy','Sword of Truth',4,17,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Blood of the Fold','Terry Goodkind','Fantasy','Sword of Truth',5,17,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Temple of the Winds','Terry Goodkind','Fantasy','Sword of Truth',6,17,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Soul of the Fire','Terry Goodkind','Fantasy','Sword of Truth',7,17,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Faith of the Fallen','Terry Goodkind','Fantasy','Sword of Truth',8,17,NULL,NULL);
-
 INSERT INTO books VALUES(NULL,'Forging the Darksword','Margaret Weis/Tracy Hickman','Fantasy','Darksword Trilogy',1,3,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Doom of the Darksword','Margaret Weis/Tracy Hickman','Fantasy','Darksword Trilogy',2,3,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Triumph of the Darksword','Margaret Weis/Tracy Hickman','Fantasy','Darksword Trilogy',3,3,NULL,NULL);
-
 INSERT INTO books VALUES(NULL,'The First Chronicles of Thomas Covenant the Unbeliever','Stephen Donaldson','Fantasy','The Chronicles of Thomas Covenant',NULL,NULL,NULL,NULL);
 INSERT INTO books VALUES(NULL,'The Wounded Land','Stephen Donaldson','Fantasy','The Second Chronicles of Thomas Covenant',1,3,NULL,NULL);
 INSERT INTO books VALUES(NULL,'The One Tree','Stephen Donaldson','Fantasy','The Second Chronicles of Thomas Covenant',2,3,NULL,NULL);
 INSERT INTO books VALUES(NULL,'White Gold Wielder','Stephen Donaldson','Fantasy','The Second Chronicles of Thomas Covenant',3,3,NULL,NULL);
-
 INSERT INTO books VALUES(NULL,'Homeland','R.A. Salvatore','Fantasy','Forgotten Realms/The Dark Elf Trilogy',1,3,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Exile','R.A. Salvatore','Fantasy','Forgotten Realms/The Dark Elf Trilogy',2,3,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Shadowdale','Scott Ciencin','Fantasy','Forgotten Realms/The Avatar Series',1,5,NULL,NULL);
@@ -131,12 +118,10 @@ INSERT INTO books VALUES(NULL,'The Chaos Curse','R.A. Salvatore','Fantasy','Forg
 INSERT INTO books VALUES(NULL,'The Legacy','R.A. Salvatore','Fantasy','Forgotten Realms/Legacy of the Drow',1,4,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Starless Night','R.A. Salvatore','Fantasy','Forgotten Realms/Legacy of the Drow',2,4,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Silverfall','Ed Greenwood','Fantasy','Forgotten Realms',NULL,NULL,NULL,NULL);
-
 INSERT INTO books VALUES(NULL,'Eragon','Christopher Paolini','Fantasy/Young Adult','The Inheritance Cycle',1,4,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Eldest','Christopher Paolini','Fantasy/Young Adult','The Inheritance Cycle',2,4,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Inheritance','Christopher Paolini','Fantasy/Young Adult','The Inheritance Cycle',3,4,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Brisinger','Christopher Paolini','Fantasy/Young Adult','The Inheritance Cycle',4,4,NULL,NULL);
-
 INSERT INTO books VALUES(NULL,'The Ruins of Gorlan','John Flanagan','Fantasy/Young Adult','Ranger''s Apprentice',1,16,NULL,NULL);
 INSERT INTO books VALUES(NULL,'The Burning Bridge','John Flanagan','Fantasy/Young Adult','Ranger''s Apprentice',2,16,NULL,NULL);
 INSERT INTO books VALUES(NULL,'The Icebound Land','John Flanagan','Fantasy/Young Adult','Ranger''s Apprentice',3,16,NULL,NULL);
@@ -145,17 +130,14 @@ INSERT INTO books VALUES(NULL,'The Sorcerer in the North','John Flanagan','Fanta
 INSERT INTO books VALUES(NULL,'The Siege of Macindaw','John Flanagan','Fantasy/Young Adult','Ranger''s Apprentice',6,16,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Erak''s Ransom','John Flanagan','Fantasy/Young Adult','Ranger''s Apprentice',7,16,NULL,NULL);
 INSERT INTO books VALUES(NULL,'The Royal Ranger','John Flanagan','Fantasy/Young Adult','Ranger''s Apprentice',12,16,NULL,NULL);
-
 INSERT INTO books VALUES(NULL,'The Stone Mage & the Sea','Sean Williams','Fantasy/Young Adult','The Change',1,3,NULL,NULL);
 INSERT INTO books VALUES(NULL,'The Sky Warden & the Sun','Sean Williams','Fantasy/Young Adult','The Change',2,3,NULL,NULL);
 INSERT INTO books VALUES(NULL,'The Storm Weaver & the Sand','Sean Williams','Fantasy/Young Adult','The Change',3,3,NULL,NULL);
-
 INSERT INTO books VALUES(NULL,'The Spook''s Apprentice','Joseph Delaney','Fantasy/Young Adult/Horror','Spooks/The Wardstone Chronicles',1,13,NULL,NULL);
 INSERT INTO books VALUES(NULL,'The Spook''s Curse','Joseph Delaney','Fantasy/Young Adult/Horror','Spooks/The Wardstone Chronicles',2,13,NULL,NULL);
 INSERT INTO books VALUES(NULL,'The Spook''s Secret','Joseph Delaney','Fantasy/Young Adult/Horror','Spooks/The Wardstone Chronicles',3,13,NULL,NULL);
 INSERT INTO books VALUES(NULL,'The Spook''s Battle','Joseph Delaney','Fantasy/Young Adult/Horror','Spooks/The Wardstone Chronicles',4,13,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Spook''s: Alice','Joseph Delaney','Fantasy/Young Adult/Horror','Spooks/The Wardstone Chronicles',12,13,NULL,NULL);
-
 INSERT INTO books VALUES(NULL,'The Forests of Silence','Emily Rodda','Fantasy/Children''s','Deltora Quest',1,8,NULL,NULL);
 INSERT INTO books VALUES(NULL,'The Lake of Tears','Emily Rodda','Fantasy/Children''s','Deltora Quest',2,8,NULL,NULL);
 INSERT INTO books VALUES(NULL,'City of the Rats','Emily Rodda','Fantasy/Children''s','Deltora Quest',3,8,NULL,NULL);
@@ -170,11 +152,9 @@ INSERT INTO books VALUES(NULL,'The Shadowlands','Emily Rodda','Fantasy/Children'
 INSERT INTO books VALUES(NULL,'Deltora Quest 3','Emily Rodda','Fantasy/Children''s','Deltora Quest/Dragons of Deltora',NULL,NULL,NULL,NULL);
 INSERT INTO books VALUES(NULL,'The Key to Rondo','Emily Rodda','Fantasy/Children''s','Rondo',1,3,NULL,NULL);
 INSERT INTO books VALUES(NULL,'The Land of Dragons','Emily Rodda','Fantasy/Children''s','Deltora',NULL,NULL,NULL,NULL);
-
 INSERT INTO books VALUES(NULL,'Slaves of Quentaris','Paul Collins','Fantasy','The Quentaris Chronicles',NULL,NULL,NULL,NULL);
 INSERT INTO books VALUES(NULL,'The Skyflower','Justin D''Ath','Fantasy','The Quentaris Chronicles',NULL,NULL,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Pirates of Quentaris','Sherryl Clark','Fantasy','The Quentaris Chronicles',NULL,NULL,NULL,NULL);
-
 INSERT INTO books VALUES(NULL,'Skulduggery Pleasant','Derek Landy','Fantasy/Young Adult/Mystery','Skulduggery Pleasant',1,9,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Playing with Fire','Derek Landy','Fantasy/Young Adult/Mystery','Skulduggery Pleasant',2,9,NULL,NULL);
 INSERT INTO books VALUES(NULL,'The Faceless Ones','Derek Landy','Fantasy/Young Adult/Mystery','Skulduggery Pleasant',3,9,NULL,NULL);
@@ -185,48 +165,39 @@ INSERT INTO books VALUES(NULL,'Kingdom of the Wicked','Derek Landy','Fantasy/You
 INSERT INTO books VALUES(NULL,'Last Stand of Dead Men','Derek Landy','Fantasy/Young Adult/Mystery','Skulduggery Pleasant',8,9,NULL,NULL);
 INSERT INTO books VALUES(NULL,'The End of the World','Derek Landy','Fantasy/Young Adult/Mystery','Skulduggery Pleasant',NULL,NULL,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Armageddon Outta Here','Derek Landy','Fantasy/Young Adult/Mystery','Skulduggery Pleasant',NULL,NULL,NULL,NULL);
-
 INSERT INTO books VALUES(NULL,'City of Bones','Cassandra Clare','Fantasy/Young Adult/Romance','The Mortal Instruments',1,6,NULL,NULL);
 INSERT INTO books VALUES(NULL,'City of Ashes','Cassandra Clare','Fantasy/Young Adult/Romance','The Mortal Instruments',2,6,NULL,NULL);
 INSERT INTO books VALUES(NULL,'City of Glass','Cassandra Clare','Fantasy/Young Adult/Romance','The Mortal Instruments',3,6,NULL,NULL);
 INSERT INTO books VALUES(NULL,'City of Fallen Angels','Cassandra Clare','Fantasy/Young Adult/Romance','The Mortal Instruments',4,6,NULL,NULL);
 INSERT INTO books VALUES(NULL,'City of Lost Souls','Cassandra Clare','Fantasy/Young Adult/Romance','The Mortal Instruments',5,6,NULL,NULL);
 INSERT INTO books VALUES(NULL,'City of Heavenly Fire','Cassandra Clare','Fantasy/Young Adult/Romance','The Mortal Instruments',6,6,NULL,NULL);
-
 INSERT INTO books VALUES(NULL,'Artemis Fowl','Eoin Colfer','Fantasy/Young Adult','The Fowl Adventures',1,8,NULL,NULL);
 INSERT INTO books VALUES(NULL,'The Arctic Incident','Eoin Colfer','Fantasy/Young Adult','The Fowl Adventures',2,8,NULL,NULL);
 INSERT INTO books VALUES(NULL,'The Eternity Code','Eoin Colfer','Fantasy/Young Adult','The Fowl Adventures',3,8,NULL,NULL);
 INSERT INTO books VALUES(NULL,'The Lost Colony','Eoin Colfer','Fantasy/Young Adult','The Fowl Adventures',5,8,NULL,NULL);
 INSERT INTO books VALUES(NULL,'The Time Paradox','Eoin Colfer','Fantasy/Young Adult','The Fowl Adventures',6,8,NULL,NULL);
 INSERT INTO books VALUES(NULL,'The Altantis Complex','Eoin Colfer','Fantasy/Young Adult','The Fowl Adventures',7,8,NULL,NULL);
-
 INSERT INTO books VALUES(NULL,'Magyk','Angie Sage','Fantasy/Young Adult','Septimus Heap',1,7,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Flyte','Angie Sage','Fantasy/Young Adult','Septimus Heap',2,7,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Physik','Angie Sage','Fantasy/Young Adult','Septimus Heap',3,7,NULL,NULL);
-
 INSERT INTO books VALUES(NULL,'Divergent','Veronica Roth','Science Fiction/Young Adult/Dystopia','Divergent',1,3,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Insurgent','Veronica Roth','Science Fiction/Young Adult/Dystopia','Divergent',2,3,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Allegiant','Veronica Roth','Science Fiction/Young Adult/Dystopia','Divergent',3,3,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Four','Veronica Roth','Science Fiction/Young Adult/Dystopia','Divergent',NULL,NULL,NULL,NULL);
-
 INSERT INTO books VALUES(NULL,'The Maze Runner','James Dashner','Science Fiction/Young Adult/Dystopia','The Maze Runner',1,3,NULL,NULL);
 INSERT INTO books VALUES(NULL,'The Scorch Trials','James Dashner','Science Fiction/Young Adult/Dystopia','The Maze Runner',2,3,NULL,NULL);
 INSERT INTO books VALUES(NULL,'The Death Cure','James Dashner','Science Fiction/Young Adult/Dystopia','The Maze Runner',3,3,NULL,NULL);
-
 INSERT INTO books VALUES(NULL,'The Hunger Games','Suzanne Collins','Science Fiction/Young Adult/Dystopia','The Hunger Games',1,3,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Catching Fire','Suzanne Collins','Science Fiction/Young Adult/Dystopia','The Hunger Games',2,3,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Mockingjay','Suzanne Collins','Science Fiction/Young Adult/Dystopia','The Hunger Games',3,3,NULL,NULL);
-
 INSERT INTO books VALUES(NULL,'Mortal Engines','Philip Reeve','Science Fiction/Young Adult/Dystopia','Mortal Engines',1,4,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Predator''s Gold','Philip Reeve','Science Fiction/Young Adult/Dystopia','Mortal Engines',2,4,NULL,NULL);
-
 INSERT INTO books VALUES(NULL,'Dune','Frank Herbert','Science Fiction','Dune',1,8,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Dune Messiah','Frank Herbert','Science Fiction','Dune',2,8,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Children of Dune','Frank Herbert','Science Fiction','Dune',3,8,NULL,NULL);
 INSERT INTO books VALUES(NULL,'God Emperor of Dune','Frank Herbert','Science Fiction','Dune',4,8,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Heretics of Dune','Frank Herbert','Science Fiction','Dune',5,8,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Chapter House Dune','Frank Herbert','Science Fiction','Dune',6,8,NULL,NULL);
-
 INSERT INTO books VALUES(NULL,'David Starr, Space Ranger','Isaac Asimov','Science Fiction','Lucky Starr',1,6,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Lucky Starr and the Pirates of the Asteroids','Isaac Asimov','Science Fiction','Lucky Starr',2,6,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Lucky Starr and the Oceans of Venus','Isaac Asimov','Science Fiction','Lucky Starr',3,6,NULL,NULL);
@@ -240,7 +211,6 @@ INSERT INTO books VALUES(NULL,'The Robots of Dawn','Isaac Asimov','Science Ficti
 INSERT INTO books VALUES(NULL,'Robot Dreams','Isaac Asimov','Science Fiction','Robot',NULL,NULL,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Foundation and Earth','Isaac Asimov','Science Fiction','Foundation',5,7,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Frontiers','Isaac Asimov','Science Fiction',NULL,NULL,NULL,NULL,NULL);
-
 INSERT INTO books VALUES(NULL,'The Recruit','Robert Muchamore','Fiction/Young Adult/Action','CHERUB',1,12,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Class A','Robert Muchamore','Fiction/Young Adult/Action','CHERUB',2,12,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Maximum Security','Robert Muchamore','Fiction/Young Adult/Action','CHERUB',3,12,NULL,NULL);
@@ -253,13 +223,11 @@ INSERT INTO books VALUES(NULL,'The Sleepwalker','Robert Muchamore','Fiction/Youn
 INSERT INTO books VALUES(NULL,'The General','Robert Muchamore','Fiction/Young Adult/Action','CHERUB',10,12,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Brigands M.C.','Robert Muchamore','Fiction/Young Adult/Action','CHERUB',11,12,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Shadow Wave','Robert Muchamore','Fiction/Young Adult/Action','CHERUB',12,12,NULL,NULL);
-
 INSERT INTO books VALUES(NULL,'Ice Station','Matthew Reilly','Fiction/Action','Shane Schofield',1,4,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Area 7','Matthew Reilly','Fiction/Action','Shane Schofield',2,4,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Scarecrow','Matthew Reilly','Fiction/Action','Shane Schofield',3,4,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Hell Island','Matthew Reilly','Fiction/Action','Shane Schofield',NULL,NULL,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Scarecrow and the Army of Thieves','Matthew Reilly','Fiction/Action','Shane Schofield',4,4,NULL,NULL);
-
 INSERT INTO books VALUES(NULL,'Seven Ancient Wonders','Matthew Reilly','Fiction/Action','Jack West Jr',1,7,NULL,NULL);
 INSERT INTO books VALUES(NULL,'The Six Sacred Stones','Matthew Reilly','Fiction/Action','Jack West Jr',2,7,NULL,NULL);
 INSERT INTO books VALUES(NULL,'The Five Greatest Warriors','Matthew Reilly','Fiction/Action','Jack West Jr',3,7,NULL,NULL);
@@ -267,7 +235,6 @@ INSERT INTO books VALUES(NULL,'The Four Legendary Kingdoms','Matthew Reilly','Fi
 INSERT INTO books VALUES(NULL,'The Three Secret Cities','Matthew Reilly','Fiction/Action','Jack West Jr',5,7,NULL,NULL);
 INSERT INTO books VALUES(NULL,'The Two Lost Mountains','Matthew Reilly','Fiction/Action','Jack West Jr',6,7,NULL,NULL);
 INSERT INTO books VALUES(NULL,'The One Impossible Labyrinth','Matthew Reilly','Fiction/Action','Jack West Jr',7,7,NULL,NULL);
-
 INSERT INTO books VALUES(NULL,'Miss Peregrine''s Home for Peculiar Children','Ransom Riggs','Fantasy/Young Adult/Mystery','Miss Peregrine''s Peculiar Children',1,6,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Deathly Hallows','J.K. Rowling','Fantasy/Young Adult','Harry Potter',7,7,NULL,NULL);
 INSERT INTO books VALUES(NULL,'The Tournament','Matthew Reilly','Fiction/Action',NULL,NULL,NULL,NULL,NULL);
@@ -310,7 +277,6 @@ INSERT INTO books VALUES(NULL,'Teacher''s Pet','Morris Gleitzman','Fiction/Child
 INSERT INTO books VALUES(NULL,'The Big Big Big Book of Tashi','Anna Fienberg/Barbara Fienberg/Kim Gamble','Fiction/Children''s','Tashi',NULL,NULL,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Don''t Call me Ishmael!','Michael Gerard Bauer','Fiction/Young Adult',NULL,NULL,NULL,NULL,NULL);
 INSERT INTO books VALUES(NULL,'The One Hundred Year Old Mand who Climbed out the Window and Disappeared','Jonas Jonasson','Fiction','Hundred-Year-Old Man',1,2,NULL,NULL);
-
 INSERT INTO books VALUES(NULL,'Paper Towns','John Green','Fiction/Young Adult',NULL,NULL,NULL,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Let it Snow','John Green/Maureen Johnson/Lauren Myracle','Fiction/Young Adult',NULL,NULL,NULL,NULL,NULL);
 INSERT INTO books VALUES(NULL,'An Abundance of Katherines','John Green','Fiction/Young Adult',NULL,NULL,NULL,NULL,NULL);
@@ -318,17 +284,14 @@ INSERT INTO books VALUES(NULL,'Turtles all the way Down','John Green','Fiction/Y
 INSERT INTO books VALUES(NULL,'The Fault in our Stars','John Green','Fiction/Young Adult',NULL,NULL,NULL,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Will Grayson, Will Grayson','John Green','Fiction/Young Adult',NULL,NULL,NULL,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Looking for Alaska','John Green','Fiction/Young Adult',NULL,NULL,NULL,NULL,NULL);
-
 INSERT INTO books VALUES(NULL,'The Subtle Art of Not Giving a Fuck','Mark Manson','Self-help','Mark Manson',1,2,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Everything is Fucked','Mark Manson','Self-help','Mark Manson',2,2,NULL,NULL);
-
 INSERT INTO books VALUES(NULL,'Dragonology','Dugald Steer','Fantasy/Children''s','Ology',1,15,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Egyptology','Dugald Steer','Fantasy/Children''s','Ology',2,15,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Wizardology','Dugald Steer','Fantasy/Children''s','Ology',3,15,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Pirateology','Dugald Steer','Fantasy/Children''s','Ology',4,15,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Monsterology','Dugald Steer','Fantasy/Children''s','Ology',6,15,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Vampireology','Dugald Steer','Fantasy/Children''s','Ology',9,15,NULL,NULL);
-
 INSERT INTO books VALUES(NULL,'Wizards and Witches','Brendan Lehane','Fantasy/Mythology/Fable','The Enchanted World',1,21,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Aesop''s Fables','Aesop','Fable',NULL,NULL,NULL,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Tales from the Mabinogion','Gwyn Thomas','Fable',NULL,NULL,NULL,NULL,NULL);
@@ -339,7 +302,6 @@ INSERT INTO books VALUES(NULL,'The Complete Grimm''s Fairy Tales','Jacob Grimm/W
 INSERT INTO books VALUES(NULL,'Myths and Legends','Hamish Hamilton/Jacynth Hope-Simpson','Mythology/Fable',NULL,NULL,NULL,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Gods and Heroes','Michael Foss','Mythology',NULL,NULL,NULL,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Fairly Wicked Tales','Stacey Turner','Fable/Horror',NULL,NULL,NULL,NULL,NULL);
-
 INSERT INTO books VALUES(NULL,'The Bad Beginning','Lemony Snicket','Fiction/Children''s','A Series of Unfortunate Events',1,13,NULL,NULL);
 INSERT INTO books VALUES(NULL,'The Reptile Room','Lemony Snicket','Fiction/Children''s','A Series of Unfortunate Events',2,13,NULL,NULL);
 INSERT INTO books VALUES(NULL,'The Wide Window','Lemony Snicket','Fiction/Children''s','A Series of Unfortunate Events',3,13,NULL,NULL);
@@ -353,7 +315,6 @@ INSERT INTO books VALUES(NULL,'The Slippery Slope','Lemony Snicket','Fiction/Chi
 INSERT INTO books VALUES(NULL,'The Grim Grotto','Lemony Snicket','Fiction/Children''s','A Series of Unfortunate Events',11,13,NULL,NULL);
 INSERT INTO books VALUES(NULL,'The Penultimate Peril','Lemony Snicket','Fiction/Children''s','A Series of Unfortunate Events',12,13,NULL,NULL);
 INSERT INTO books VALUES(NULL,'The End','Lemony Snicket','Fiction/Children''s','A Series of Unfortunate Events',13,13,NULL,NULL);
-
 INSERT INTO books VALUES(NULL,'Family Bible','Unknown','Religion',NULL,NULL,NULL,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Mao''s Last Dancer','Li Cunxin','Nonfiction',NULL,NULL,NULL,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Is this Anything?','Jerry Seinfeld','Biography',NULL,NULL,NULL,NULL,NULL);
@@ -395,11 +356,9 @@ INSERT INTO books VALUES(NULL,'Australian Oxford Dictionary','Oxford','Language'
 INSERT INTO books VALUES(NULL,'Runic Inscriptions','Paul Johnson','Language',NULL,NULL,NULL,NULL,NULL);
 INSERT INTO books VALUES(NULL,'The Little Book of Foreign Swear Words','Sid Dinch','Language',NULL,NULL,NULL,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Holy Bible','Unknown','Religion',NULL,NULL,NULL,NULL,NULL);
-
 INSERT INTO books VALUES(NULL,'Great Encyclopaedic Dictionary v1','Reader''s Digest','Nonfiction','Great Encyclopaedic Dictionary',1,3,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Great Encyclopaedic Dictionary v2','Reader''s Digest','Nonfiction','Great Encyclopaedic Dictionary',2,3,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Great Encyclopaedic Dictionary v3','Reader''s Digest','Nonfiction','Great Encyclopaedic Dictionary',3,3,NULL,NULL);
-
 INSERT INTO books VALUES(NULL,'The Pathfinder','James Fenimore Cooper','Fiction/History',NULL,NULL,NULL,NULL,NULL);
 INSERT INTO books VALUES(NULL,'The Raven','Peter Landesman','Fiction/History',NULL,NULL,NULL,NULL,NULL);
 INSERT INTO books VALUES(NULL,'All Quiet on the Westernfront','Erich Maria Remarque','Fiction/History',NULL,NULL,NULL,NULL,NULL);
@@ -409,11 +368,9 @@ INSERT INTO books VALUES(NULL,'Destroy Carthage','David Gibbins','Fiction/Histor
 INSERT INTO books VALUES(NULL,'Relics','Pip Caughan-Hughes','Fiction/History','Brother Petroc',1,4,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Queen of Swords','Sara Donati','Fiction/History','Wilderness',5,6,NULL,NULL);
 INSERT INTO books VALUES(NULL,'The Song of the Gladiator','Paul Doherty','Fiction/History','Ancient Rome',3,5,NULL,NULL);
-
 INSERT INTO books VALUES(NULL,'The Feynman Lectures on Physics v1','Richard Feynman','Science','The Feynman Lectures on Physics',1,3,NULL,NULL);
 INSERT INTO books VALUES(NULL,'The Feynman Lectures on Physics v2','Richard Feynman','Science','The Feynman Lectures on Physics',2,3,NULL,NULL);
 INSERT INTO books VALUES(NULL,'The Feynman Lectures on Physics v3','Richard Feynman','Science','The Feynman Lectures on Physics',3,3,NULL,NULL);
-
 INSERT INTO books VALUES(NULL,'Mathematical Insights','Dippy C. Olijnyk','Science',NULL,NULL,NULL,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Giancoli 6th Edition','Pearson','Science',NULL,NULL,NULL,NULL,NULL);
 INSERT INTO books VALUES(NULL,'The Calculus with Analytic Geometry 3rd Edition','Leithold','Science',NULL,NULL,NULL,NULL,NULL);
@@ -446,15 +403,12 @@ INSERT INTO books VALUES(NULL,'Greece and Rome at War','Connollo','History',NULL
 INSERT INTO books VALUES(NULL,'Soldiering On','Australian War Memorial','History',NULL,NULL,NULL,NULL,NULL);
 INSERT INTO books VALUES(NULL,'A History of Antarctica','Stephen Martin','History',NULL,NULL,NULL,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Damn the Dardanelles','John Laffin','History',NULL,NULL,NULL,NULL,NULL);
-
 INSERT INTO books VALUES(NULL,'This England v1','I. Tenen','History','This England',1,2,NULL,NULL);
 INSERT INTO books VALUES(NULL,'This England v2','I. Tenen','History','This England',2,2,NULL,NULL);
-
 INSERT INTO books VALUES(NULL,'The Gathering Storm','Winston S. Churchill','History','The Second World War',1,6,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Their Finest Hour','Winston S. Churchill','History','The Second World War',2,6,NULL,NULL);
 INSERT INTO books VALUES(NULL,'The Grand Alliance','Winston S. Churchill','History','The Second World War',3,6,NULL,NULL);
 INSERT INTO books VALUES(NULL,'The Hinge of Fate','Winston S. Churchill','History','The Second World War',4,6,NULL,NULL);
-
 INSERT INTO books VALUES(NULL,'A Dictionary of Chivalry','Longmans','Language',NULL,NULL,NULL,NULL,NULL);
 INSERT INTO books VALUES(NULL,'4 Ingredients 2','Kim McCosker/Rachael Bermingham','Cooking',NULL,NULL,NULL,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Legions of Middle-Earth','Games Workshop','Reference',NULL,NULL,NULL,NULL,NULL);
@@ -479,7 +433,6 @@ INSERT INTO books VALUES(NULL,'How to Rock Climb!','John Long','Sport',NULL,NULL
 INSERT INTO books VALUES(NULL,'How to Gym Climb','John Long','Sport',NULL,NULL,NULL,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Rock Climbing','John Barry/Nigel Shepherd','Sport',NULL,NULL,NULL,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Submarine Design & Engineering','BMT','Technology',NULL,NULL,NULL,NULL,NULL);
-
 INSERT INTO books VALUES(NULL,'Art & Arcana','Michael Witwer/Kyle Newman/Sam Witwer','Art','Dungeons & Dragons',NULL,NULL,NULL,NULL);
 INSERT INTO books VALUES(NULL,'The Chronicles of Exandria: The Tale of Vox Machina','Critical Role','Art','The Chronicles of Exandria',1,3,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Dungeon Masters Guide (5E)','Wizards of the Coast','Reference','Dungeons & Dragons/5E',NULL,NULL,NULL,NULL);
@@ -540,7 +493,6 @@ INSERT INTO books VALUES(NULL,'Game Angry: How to RPG the Angry Way','Scott Rehm
 INSERT INTO books VALUES(NULL,'Fizban''s Treasury of Dragons (5E)','Wizards of the Coast','Reference','Dungeons & Dragons/5E',NULL,NULL,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Candlekeep Mysteries (5E)','Wizards of the Coast','Reference','Dungeons & Dragons/5E',NULL,NULL,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Wanderer''s Guide to Merchants & Magic (5E)','Eventyr Games','Reference','Dungeons & Dragons/5E',NULL,NULL,NULL,NULL);
-
 INSERT INTO books VALUES(NULL,'Vietnamese Cooking','Periplus Editions','Cooking',NULL,NULL,NULL,NULL,NULL);
 INSERT INTO books VALUES(NULL,'The Rought Guide to South America on a Budget','Rough Guides','Travel','Rough Guides',NULL,NULL,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Till we have Faces','C.S. Lewis','Fiction',NULL,NULL,NULL,NULL,NULL);
