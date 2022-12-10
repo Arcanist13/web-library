@@ -166,8 +166,6 @@ export class BookComponent {
    * @param file  file to process
    */
   public fileUpload(file?: File): void {
-    console.log('File upload!');
-    console.log(file);
     if (file) {
       this._libraryService.processImage(file).then((res: IBookImageProcessed) => {
         if (this.data) {

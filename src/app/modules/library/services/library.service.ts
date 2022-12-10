@@ -202,7 +202,7 @@ export class LibraryService {
             this._authours = res;
             resolve(res);
           },
-          error: () => { console.log('Failed to get autocomplete list'); reject(); }
+          error: () => { console.log('Failed to get autocomplete authour list'); reject(); }
         });
       }
     });
@@ -230,7 +230,7 @@ export class LibraryService {
             this._genres = res;
             resolve(res);
           },
-          error: () => { console.log('Failed to get autocomplete list'); reject(); }
+          error: () => { console.log('Failed to get autocomplete genre list'); reject(); }
         });
       }
     });
@@ -258,7 +258,7 @@ export class LibraryService {
             this._series = res;
             resolve(res);
           },
-          error: () => { console.log('Failed to get autocomplete list'); reject(); }
+          error: () => { console.log('Failed to get autocomplete series name list'); reject(); }
         });
       }
     });

@@ -16,7 +16,7 @@ class ImageProcessing:
     result = self.std_background(img_cv)
 
     # Find the white area and crop to it
-    _, thresh = cv2.threshold(cv2.cvtColor(result, cv2.COLOR_BGR2GRAY), 250, 255, cv2.THRESH_BINARY)
+    _, thresh = cv2.threshold(cv2.cvtColor(result, cv2.COLOR_BGR2GRAY), 200, 255, cv2.THRESH_BINARY)
     element = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (30,30))
     mask = cv2.erode(thresh, element, iterations = 2)
     mask = cv2.dilate(mask, element, iterations = 2)
@@ -29,7 +29,7 @@ class ImageProcessing:
     img_cv = img_cv[y1:y2, x1:x2]
 
     # Create bounding box of content on white background and crop
-    _, thresh = cv2.threshold(result, 250, 255, cv2.THRESH_BINARY_INV)
+    _, thresh = cv2.threshold(result, 200, 255, cv2.THRESH_BINARY_INV)
     x1,y1,w,h = cv2.boundingRect(cv2.cvtColor(thresh, cv2.COLOR_BGR2GRAY))
     x2 = x1+w
     y2 = y1+h
