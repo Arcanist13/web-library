@@ -18,6 +18,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatChipsModule } from '@angular/material/chips';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 
 import { ConfirmComponent } from './modals/confirm/confirm.component';
@@ -37,6 +38,7 @@ const MATERIAL_IMPORTS = [
   MatTooltipModule,
   MatAutocompleteModule,
   MatPaginatorModule,
+  MatChipsModule,
   NgxDropzoneModule,
 ];
 // const SHARED_COMPONENTS = [];

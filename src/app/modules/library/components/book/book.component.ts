@@ -10,6 +10,9 @@ import { HOME_PATH } from 'src/app/static/constants';
 import { IBook, IBookImage, IBookImageProcessed } from 'src/app/static/models/book.model';
 import { ObservableService } from 'src/app/static/services/observable.service';
 import { LibraryService } from '../../services/library.service';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { MatChipInputEvent } from '@angular/material/chips';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 
 @Component({
   selector: 'app-book',
@@ -28,6 +31,9 @@ export class BookComponent {
   public filteredAuthours: Observable<Array<string>>;
   public filteredGenres: Observable<Array<string>>;
   public filteredSeries: Observable<Array<string>>;
+
+  // Chip input
+  public separatorKeysCodes: number[] = [ENTER, COMMA];
 
   constructor(
     private _observableService: ObservableService,
@@ -96,7 +102,7 @@ export class BookComponent {
       map((value) => this._filter(value || '', this._libraryService.genres)),
     );
     this.filteredSeries = seriesForm.valueChanges.pipe(
-      startWith(''),
+      startWith(null),
       map((value) => this._filter(value || '', this._libraryService.series)),
     );
 
@@ -124,13 +130,13 @@ export class BookComponent {
    * Will redirect to the home page after successful login, or display
    * relevant errors on fail.
    */
-  async onSubmit(): Promise<void> {
+  public async onSubmit(): Promise<void> {
     this.formInvalid = false;
     if (this.form.valid) {
       try {
         const name = this.form.get('name')?.value;
         const authour = this.form.get('authour')?.value; // as string).replace(', ', '/'),
-        const genres = this.form.get('genres')?.value; // as string).replace(', ', '/'),
+        const genres = this.data ? this.data.genres : undefined; // as string).replace(', ', '/'),
         const series_name = this.form.get('series_name')?.value;
         const series_number = this.form.get('series_number')?.value;
         const series_total = this.form.get('series_total')?.value;
@@ -172,26 +178,9 @@ export class BookComponent {
           this.data.image_full = res.image_full;
           this.data.image_icon = res.image_icon;
         }
-      });
+      }).catch(() => this._snackService.openInfoSnack('Failed to process the image.'));
     } else {
       this._snackService.openInfoSnack('Failed to find a valid image file.');
-    }
-  }
-
-  /**
-   * Check if a field has an autocomplete
-   *
-   * @param key field name
-   * @returns   if the field has autocomplete
-   */
-  public isAutocomplete(key: string): boolean {
-    switch (key) {
-      case 'authour':
-      case 'genres':
-      case 'series_name':
-        return true;
-      default:
-        return false;
     }
   }
 
@@ -216,7 +205,8 @@ export class BookComponent {
    * Close the editing page
    */
   public close(): void {
-    this._router.navigate([`/${HOME_PATH}`]);
+    this.editing = false;
+    this.form.disable();
   }
 
   /**
@@ -258,12 +248,46 @@ export class BookComponent {
   }
 
   /**
-   * Get the form field keys
+   * Add a new genre to the list and chips
    *
-   * @returns list of fields
+   * @param event chip add event
    */
-  public getFormKeys(): Array<string> {
-    return Object.keys(this.form.controls);
+  public addGenre(event: MatChipInputEvent): void {
+    const value = (event.value || '').trim();
+    // Add our fruit
+    if (value && this.data) {
+      this.data.genres = `${this.data.genres}${this.data.genres ? '/' : ''}${value}`;
+    }
+    // Clear the input value
+    event.chipInput.clear();
+    this.form.get('genres')?.setValue(null);
+  }
+
+  /**
+   * Remove a genre from the list
+   *
+   * @param genre genre to remove
+   */
+  public removeGenre(genre: string): void {
+    if (this.data) {
+      this.data.genres = this.data.genres?.replace(genre, '').replace('//', '/');
+      if (this.data.genres?.split('/')[1] === '') {
+        this.data.genres = this.data.genres.replace('/', '');
+      }
+    }
+  }
+
+  /**
+   * Add a genre to the list by selection from autocomplete
+   *
+   * @param event autocomplete select event
+   */
+  public selectGenre(event: MatAutocompleteSelectedEvent): void {
+    if (this.data) {
+      this.data.genres = `${this.data.genres}${this.data.genres ? '/' : ''}${event.option.viewValue}`;
+    }
+    // this.fruitInput.nativeElement.value = '';
+    this.form.get('genres')?.setValue(null);
   }
 
   /**

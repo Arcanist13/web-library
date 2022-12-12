@@ -13,31 +13,87 @@
           aria-label="Button that switches to edit book mode">
           <mat-icon>edit_note</mat-icon>
         </button>
-        <button mat-fab class="book-button" color="danger" (click)="confirmDelete()"
-          matTooltip="Delete" aria-label="Button that deletes the book" aria-label="Delete book button">
+        <button mat-fab class="book-button" color="danger" (click)="confirmDelete()" matTooltip="Delete"
+          aria-label="Button that deletes the book" aria-label="Delete book button">
           <mat-icon>delete_forever</mat-icon>
         </button>
       </div>
 
-      <!-- Form fields -->
-      <mat-form-field *ngFor="let key of getFormKeys()" class="full-width-input mb-2">
-        <mat-label>{{ key | niceKeyString | titlecase }}</mat-label>
-        <input matInput [formControlName]="key" [ngClass]="{'full-text': !editing}" [matAutocomplete]="auto"
-          [matAutocompleteDisabled]="!isAutocomplete(key)">
-        <mat-error *ngIf="getField(key)?.hasError('required')">The book {{ key }} is required</mat-error>
-        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-          <mat-option *ngFor="let option of getAutocomplete(key) | async" [value]="option">
+      <!-- Name -->
+      <mat-form-field class="full-width-input mb-2">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" [ngClass]="{'full-text': !editing}">
+        <mat-error *ngIf="getField('name')?.hasError('required')">The book name is required</mat-error>
+      </mat-form-field>
+
+      <!-- Authour -->
+      <mat-form-field class="full-width-input mb-2">
+        <mat-label>Authour</mat-label>
+        <input matInput formControlName="authour" [ngClass]="{'full-text': !editing}" [matAutocomplete]="autoAuthour">
+        <mat-error *ngIf="getField('authour')?.hasError('required')">The book authour is required</mat-error>
+        <mat-autocomplete autoActiveFirstOption #autoAuthour="matAutocomplete">
+          <mat-option *ngFor="let option of getAutocomplete('authour') | async" [value]="option">
             {{option}}
           </mat-option>
         </mat-autocomplete>
       </mat-form-field>
 
+      <!-- Genres -->
+      <mat-form-field class="full-width-input mb-2">
+        <mat-label>Genres</mat-label>
+        <mat-chip-grid #chipGrid [disabled]="form.disabled" aria-label="Book genre selctions">
+          <mat-chip-row *ngFor="let genre of this.data?.genres?.split('/')" (removed)="removeGenre(genre)"
+            [ngClass]="{'full-text': !editing}">
+            {{genre}}
+            <button *ngIf="editing" matChipRemove [attr.aria-label]="'Remove genre ' + genre">
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip-row>
+        </mat-chip-grid>
+        <input [matChipInputFor]="chipGrid" formControlName="genres" [matAutocomplete]="autoGenre"
+          [ngClass]="{'d-none': !editing}" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+          (matChipInputTokenEnd)="addGenre($event)" />
+        <mat-autocomplete #autoGenre="matAutocomplete" (optionSelected)="selectGenre($event)">
+          <mat-option *ngFor="let option of getAutocomplete('genres') | async" [value]="option">
+            {{option}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+      <!-- Series -->
+      <mat-form-field class="full-width-input mb-2">
+        <mat-label>Series Name</mat-label>
+        <input matInput formControlName="series_name" [ngClass]="{'full-text': !editing}"
+          [matAutocomplete]="autoSeries">
+        <mat-autocomplete autoActiveFirstOption #autoSeries="matAutocomplete">
+          <mat-option *ngFor="let option of getAutocomplete('series_name') | async" [value]="option">
+            {{option}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+      <!-- Series number -->
+      <mat-form-field class="full-width-input mb-2">
+        <mat-label>Series Number</mat-label>
+        <input matInput formControlName="series_number" [ngClass]="{'full-text': !editing}">
+      </mat-form-field>
+
+      <!-- Series total -->
+      <mat-form-field class="full-width-input mb-2">
+        <mat-label>Series Total</mat-label>
+        <input matInput formControlName="series_total" [ngClass]="{'full-text': !editing}">
+      </mat-form-field>
+
+      <!-- Notes -->
+
+      <!-- Submit buttons -->
       <div>
         <button type="button" *ngIf="editing" mat-raised-button color="basic" (click)="close()"
           class="me-2">Cancel</button>
         <button *ngIf="editing" mat-raised-button color="general" type="submit">{{ getSubmitText() }}</button>
       </div>
 
+      <!-- Image area -->
       <div class="mt-3">
         <div class="fit-content d-flex align-items-center justify-content-center" *ngIf="(!!data?.image_full)">
           <img [src]="'data:image/jpg;base64,'+data?.image_full" class="img-fluid rounded" alt="Book cover image">
@@ -48,7 +104,8 @@
               <mat-icon>edit</mat-icon>
             </a>
           </label>
-          <input *ngIf="editing" class="d-none" id="file-upload" type="file" accept="image/*" capture="environment" (change)="fileUpload($any($event.target).files[0])">
+          <input *ngIf="editing" class="d-none" id="file-upload" type="file" accept="image/*" capture="environment"
+            (change)="fileUpload($any($event.target).files[0])">
         </div>
       </div>
       <!-- Upload initial image -->

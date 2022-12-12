@@ -1,6 +1,5 @@
 # TODO List
 
-- Change genre to be pill selects
 - Add filter by genre option
 - Book notes section
 - Book damaged flag
@@ -8,5 +7,6 @@
 
 ## Done
 
-- Add large image preview to CVE page
-- Allow image to be changed
+- Add large image preview to CVE page (11/12)
+- Allow image to be changed (11/12)
+- Change genre to be pill selects (12/12)
