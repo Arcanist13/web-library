@@ -17,7 +17,7 @@ imageProcessing = ImageProcessing()
 @router.get('/books', response_model=Optional[List[Book]], tags=["book"])
 async def get_all_books():
   '''Get all books'''
-  books = get_db_all("SELECT id, name, authour, genres, series_name, series_number, series_total FROM books ORDER BY id ASC")
+  books = get_db_all("SELECT id, name, authour, genres, series_name, series_number, series_total, notes, damaged, inconsistent FROM books ORDER BY id ASC")
   return books
 
 @router.get('/icons', response_model=Optional[List[BookIcon]], tags=["book"])
@@ -52,9 +52,9 @@ async def edit_book(book_id: int, book: NewBook, user: User = Depends(get_curren
   if book_id is not None and user is not None:
     execute('''
       UPDATE books SET
-      name = ?, authour = ?, genres = ?, series_name = ?, series_number = ?, series_total = ?, image_full = ?, image_icon = ?
+      name = ?, authour = ?, genres = ?, series_name = ?, series_number = ?, series_total = ?, image_full = ?, image_icon = ?, notes = ?, damaged = ?, inconsistent = ?
       WHERE id = ?
-    ''', [book.name, book.authour, book.genres, book.series_name, book.series_number, book.series_total, book.image_full, book.image_icon, book_id])
+    ''', [book.name, book.authour, book.genres, book.series_name, book.series_number, book.series_total, book.image_full, book.image_icon, book.notes, book.damaged, book.inconsistent, book_id])
     return get_db_one('SELECT * FROM books WHERE id = ?', [book_id])
   else:
     raise HTTPException(status_code=500, detail='Failed to modify a book')
@@ -65,11 +65,11 @@ async def add_book(book: NewBook, user: User = Depends(get_current_user)):
   if book is not None and user is not None:
     execute('''
       INSERT INTO books
-        (name, authour, genres, series_name, series_number, series_total, image_full, image_icon)
+        (name, authour, genres, series_name, series_number, series_total, image_full, image_icon, notes, damaged, inconsistent)
       VALUES
         (?, ?, ?, ?, ?, ?, ?, ?)
     ''', [
-      book.name, book.authour, book.genres, book.series_name, book.series_number, book.series_total, book.image_full, book.image_icon
+      book.name, book.authour, book.genres, book.series_name, book.series_number, book.series_total, book.image_full, book.image_icon, book.notes, book.damaged, book.inconsistent
     ])
   else:
     raise HTTPException(status_code=500, detail='Cannot add book')

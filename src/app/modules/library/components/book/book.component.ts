@@ -88,7 +88,10 @@ export class BookComponent {
         genres: genreForm,
         series_name: seriesForm,
         series_number: new FormControl(this.data?.series_number, []),
-        series_total: new FormControl(this.data?.series_total, [])
+        series_total: new FormControl(this.data?.series_total, []),
+        notes: new FormControl(this.data?.notes, []),
+        damaged: new FormControl(this.data?.damaged, []),
+        inconsistent: new FormControl(this.data?.inconsistent, []),
       }
     );
 
@@ -142,6 +145,9 @@ export class BookComponent {
         const series_total = this.form.get('series_total')?.value;
         const image_full = this.data ? this.data.image_full : undefined;
         const image_icon = this.data ? this.data.image_icon : undefined;
+        const notes = this.form.get('notes')?.value;
+        const damaged = this.form.get('damaged')?.value;
+        const inconsistent = this.form.get('inconsistent')?.value;
 
         const book = {
           id: this.data ? this.data.id : undefined,
@@ -152,7 +158,10 @@ export class BookComponent {
           series_number: series_number ? +series_number : undefined,
           series_total: series_total ? +series_total : undefined,
           image_full,
-          image_icon
+          image_icon,
+          notes: notes ? notes : undefined,
+          damaged: damaged ? +damaged : undefined,
+          inconsistent: inconsistent ? +inconsistent : undefined,
         } as (IBook);
 
         if (this.editing && this.data) {

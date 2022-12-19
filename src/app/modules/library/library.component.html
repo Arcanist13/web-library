@@ -29,8 +29,21 @@
       <div class="col" (click)="viewBook(book)">
         <mat-list-item class="book-select">
           <img matListItemAvatar [src]="getIcon(book.image_icon)" [alt]="book.name + ' cover image.'" loading="lazy">
-          <div matListItemTitle>{{ book.name }}</div>
-          <div matListItemLine>{{ book.authour | splitOnSeparator: '/' }}</div>
+          <div matListItemTitle>
+            {{book.name}}
+
+            <!-- Icons -->
+            <span>
+              <mat-icon *ngIf="book.damaged" class="icon-align-text" aria-hidden="false" inline="1"
+                aria-label="This book is damaged" color="text-danger" fontIcon="heart_broken"></mat-icon>
+              <mat-icon *ngIf="book.inconsistent" class="icon-align-text" aria-hidden="false" inline="1"
+                aria-label="This book is inconsistent in the series" color="text-warning"
+                fontIcon="difference"></mat-icon>
+              <mat-icon *ngIf="!!book.notes && book.notes !== ''" class="icon-align-text" aria-hidden="false" inline="1"
+                aria-label="This book has notes" fontIcon="description"></mat-icon>
+            </span>
+          </div>
+          <div matListItemLine>{{book.authour | splitOnSeparator: '/'}}</div>
         </mat-list-item>
       </div>
 
