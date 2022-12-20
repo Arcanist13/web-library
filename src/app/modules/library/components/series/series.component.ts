@@ -138,7 +138,11 @@ export class SeriesComponent {
 
     this._seriesList = this._filterService.filterSeries(this._seriesService.series);
     this._seriesList.sort((a, b) => this.seriesProportion(b.series_numbers, b.series_total) - this.seriesProportion(a.series_numbers, a.series_total));
+
+    // Update pageinator properties
     this.length = this._seriesList.length;
+    this.pageIndex = 0;
+    localStorage.setItem(STORAGE_KEY_BOOKS_PAGE_INDEX, this.pageIndex.toString());
   }
 
   /**

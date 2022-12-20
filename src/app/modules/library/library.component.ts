@@ -158,7 +158,11 @@ export class LibraryComponent {
     this._filterService.bookFilter = searchText;
 
     this._bookList = this._filterService.filterBooks(this._libraryService.books);
+
+    // Update pageinator properties
     this.length = this._bookList.length;
+    this.pageIndex = 0;
+    localStorage.setItem(STORAGE_KEY_BOOKS_PAGE_INDEX, this.pageIndex.toString());
   }
 
   /**

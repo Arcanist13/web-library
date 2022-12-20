@@ -230,6 +230,7 @@ export class BookComponent {
 
     this.editing = true;
     this.form.enable();
+    this.form.get('genres')?.reset();
   }
 
   /**
