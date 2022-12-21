@@ -8,6 +8,10 @@
   height: 40px;
 }
 
+.icon-align-text {
+  vertical-align: text-top;
+}
+
 .mat-general {
   background-color: #0d6efd;
   color: #fff;
@@ -22,10 +26,16 @@
   background-color: #dc3545;
   color: #fff;
 }
+.mat-text-danger {
+  color: #dc3545;
+}
 
 .mat-warning {
   background-color: #ffc107;
   color: #fff;
+}
+.mat-text-warning {
+  color: #ffc107;
 }
 
 .book-select {

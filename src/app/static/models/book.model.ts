@@ -11,6 +11,9 @@ export interface IBook {
   series_total?: number;
   image_full?: string;
   image_icon?: string;
+  notes?: string;
+  damaged?: number;
+  inconsistent?: number;
 }
 
 /**

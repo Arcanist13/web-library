@@ -3,7 +3,7 @@
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <!-- Title -->
       <h2>{{ getHeaderText() }}</h2>
-      <mat-error *ngIf="formInvalid" class="mb-2">
+      <mat-error *ngIf="formInvalid" class="mb-1">
         There is an error within the form.
       </mat-error>
 
@@ -20,14 +20,14 @@
       </div>
 
       <!-- Name -->
-      <mat-form-field class="full-width-input mb-2">
+      <mat-form-field class="full-width-input mb-1">
         <mat-label>Name</mat-label>
         <input matInput formControlName="name" [ngClass]="{'full-text': !editing}">
         <mat-error *ngIf="getField('name')?.hasError('required')">The book name is required</mat-error>
       </mat-form-field>
 
       <!-- Authour -->
-      <mat-form-field class="full-width-input mb-2">
+      <mat-form-field class="full-width-input mb-1">
         <mat-label>Authour</mat-label>
         <input matInput formControlName="authour" [ngClass]="{'full-text': !editing}" [matAutocomplete]="autoAuthour">
         <mat-error *ngIf="getField('authour')?.hasError('required')">The book authour is required</mat-error>
@@ -39,7 +39,7 @@
       </mat-form-field>
 
       <!-- Genres -->
-      <mat-form-field class="full-width-input mb-2">
+      <mat-form-field class="full-width-input mb-1">
         <mat-label>Genres</mat-label>
         <mat-chip-grid #chipGrid [disabled]="form.disabled" aria-label="Book genre selctions">
           <mat-chip-row *ngFor="let genre of this.data?.genres?.split('/')" (removed)="removeGenre(genre)"
@@ -52,7 +52,7 @@
         </mat-chip-grid>
         <input [matChipInputFor]="chipGrid" formControlName="genres" [matAutocomplete]="autoGenre"
           [ngClass]="{'d-none': !editing}" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-          (matChipInputTokenEnd)="addGenre($event)" />
+          (matChipInputTokenEnd)="addGenre($event)">
         <mat-autocomplete #autoGenre="matAutocomplete" (optionSelected)="selectGenre($event)">
           <mat-option *ngFor="let option of getAutocomplete('genres') | async" [value]="option">
             {{option}}
@@ -61,7 +61,7 @@
       </mat-form-field>
 
       <!-- Series -->
-      <mat-form-field class="full-width-input mb-2">
+      <mat-form-field class="full-width-input mb-1">
         <mat-label>Series Name</mat-label>
         <input matInput formControlName="series_name" [ngClass]="{'full-text': !editing}"
           [matAutocomplete]="autoSeries">
@@ -73,18 +73,31 @@
       </mat-form-field>
 
       <!-- Series number -->
-      <mat-form-field class="full-width-input mb-2">
+      <mat-form-field class="full-width-input mb-1">
         <mat-label>Series Number</mat-label>
-        <input matInput formControlName="series_number" [ngClass]="{'full-text': !editing}">
+        <input matInput formControlName="series_number" [ngClass]="{'full-text': !editing}" autocomplete="off"
+          type="number">
       </mat-form-field>
 
       <!-- Series total -->
-      <mat-form-field class="full-width-input mb-2">
+      <mat-form-field class="full-width-input mb-1">
         <mat-label>Series Total</mat-label>
-        <input matInput formControlName="series_total" [ngClass]="{'full-text': !editing}">
+        <input matInput formControlName="series_total" [ngClass]="{'full-text': !editing}" autocomplete="off"
+          type="number">
       </mat-form-field>
 
       <!-- Notes -->
+      <mat-form-field class="full-width-input mb-1">
+        <mat-label>Notes</mat-label>
+        <textarea matInput formControlName="notes" [ngClass]="{'full-text': !editing}" rows="2"
+          autocomplete="off"></textarea>
+      </mat-form-field>
+
+      <!-- Book Status -->
+      <section class="mb-1">
+        <mat-checkbox matInput formControlName="damaged" color="warn">Damaged</mat-checkbox>
+        <mat-checkbox matInput formControlName="inconsistent" color="warn">Inconsistent</mat-checkbox>
+      </section>
 
       <!-- Submit buttons -->
       <div>
