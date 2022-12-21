@@ -27,6 +27,7 @@ export class BookComponent {
   public editing: boolean;
   public data?: IBook;
   public loggedIn: boolean;
+  private _originalImages: Array<string | undefined>;
 
   public filteredAuthours: Observable<Array<string>>;
   public filteredGenres: Observable<Array<string>>;
@@ -45,6 +46,7 @@ export class BookComponent {
   ) {
     this.editing = this._libraryService.editing;
     this.data = this._libraryService.selectedBook;
+    this._originalImages = [];
 
     // Subscribe to login state changes (for logout mostly)
     this.loggedIn = this._userService.onLoginStateUpdate.value;
@@ -79,6 +81,7 @@ export class BookComponent {
     const authForm = new FormControl(this.data?.authour, [Validators.required]);
     const genreForm = new FormControl(this.data?.genres, []);
     const seriesForm = new FormControl(this.data?.series_name, []);
+    this._originalImages = [this.data?.image_full, this.data?.image_icon];
 
     // Init the form data
     this.form = new FormGroup(
@@ -206,6 +209,10 @@ export class BookComponent {
    */
   public close(): void {
     this.editing = false;
+    if (this.data) {
+      this.data.image_full = this._originalImages[0];
+      this.data.image_icon = this._originalImages[1];
+    }
     this.form.disable();
   }
 

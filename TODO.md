@@ -4,6 +4,7 @@
 - Book notes section
 - Book damaged flag
 - Book inconsistent flag
+- Book with series count updates all on edit / create
 
 ## Done
 

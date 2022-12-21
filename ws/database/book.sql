@@ -475,7 +475,7 @@ INSERT INTO books VALUES(NULL,'Complete Warrior (3.5E)','Wizards of the Coast','
 INSERT INTO books VALUES(NULL,'Monster Manual (3E)','Wizards of the Coast','Reference','Dungeons & Dragons/3E',NULL,NULL,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Dungeon Master''s Guide (3E)','Wizards of the Coast','Reference','Dungeons & Dragons/3E',NULL,NULL,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Forgotten Realms Campaign Setting (3E)','Wizards of the Coast','Reference','Dungeons & Dragons/3E',NULL,NULL,NULL,NULL);
-INSERT INTO books VALUES(NULL,'Dungeon Master''s Guide (2E)','Wizards of the Coast','Reference','Dungeons & Dragons/2E',NULL,NULL,NULL,NULL);
+INSERT INTO books VALUES(NULL,'Dungeon Master''s Guide (1.5E)','Wizards of the Coast','Reference','Dungeons & Dragons/1.5E',NULL,NULL,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Monster Manual (1.5E)','Wizards of the Coast','Reference','Dungeons & Dragons/1.5E',NULL,NULL,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Monster Manual II (1.5E)','Wizards of the Coast','Reference','Dungeons & Dragons/1.5E',NULL,NULL,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Forgotten Realms: Dreams of the Red Wizards (1.5E)','Wizards of the Coast','Reference','Dungeons & Dragons/1.5E',NULL,NULL,NULL,NULL);
@@ -512,3 +512,15 @@ INSERT INTO books VALUES(NULL,'The Barefoot Investor','Scott Pape','Self-help',N
 INSERT INTO books VALUES(NULL,'The Dragon Keeper','Robin Hobb','Fantasy','The Rain Wild Chronicles',1,4,NULL,NULL);
 INSERT INTO books VALUES(NULL,'Dragon Haven','Robin Hobb','Fantasy','The Rain Wild Chronicles',2,4,NULL,NULL);
 INSERT INTO books VALUES(NULL,'The Measure of the Magic','Terry Brooks','Fantasy','Legends of Shannara',2,2,NULL,NULL);
+INSERT INTO books VALUES(NULL,'Lord of the Rings: Photo Guide','New Line Cinema','Reference',NULL,NULL,NULL,NULL,NULL);
+INSERT INTO books VALUES(NULL,'The Waddington Card Trick Collection','Graham Reed','Reference',NULL,NULL,NULL,NULL,NULL);
+INSERT INTO books VALUES(NULL,'Figures for Fun','J.A.H. Hunter','Reference',NULL,NULL,NULL,NULL,NULL);
+INSERT INTO books VALUES(NULL,'Kingdoms & Warfare (5E)','MCDM','Reference','Dungeons & Dragons/5E',NULL,NULL,NULL,NULL);
+INSERT INTO books VALUES(NULL,'Orbital','Jack Harrison','Reference',NULL,NULL,NULL,NULL,NULL);
+INSERT INTO books VALUES(NULL,'Adventurer''s Trail','Ben Allsop','Reference','Dungeons & Dragons/5E',NULL,NULL,NULL,NULL);
+INSERT INTO books VALUES(NULL,'Avatar Legends RPG','Magpie Games','Reference','Avatar Legends',1,2,NULL,NULL);
+INSERT INTO books VALUES(NULL,'Avatar Legends Wan Shi Tong''s Adventure Guide','Magpie Games','Reference','Avatar Legends',2,2,NULL,NULL);
+INSERT INTO books VALUES(NULL,'Tome of Beasts III (5E)','Kobold Press','Reference','Dungeons & Dragons/5E',NULL,NULL,NULL,NULL);
+INSERT INTO books VALUES(NULL,'Quick Start Rules (4E)','Wizards of the Coast','Reference','Dungeons & Dragons/4E',NULL,NULL,NULL,NULL);
+INSERT INTO books VALUES(NULL,'Dungeon Master''s Book (4E)','Wizards of the Coast','Reference','Dungeons & Dragons/4E',NULL,NULL,NULL,NULL);
+INSERT INTO books VALUES(NULL,'The Vegetarian Kitchen','Herron Books','Cooking',NULL,NULL,NULL,NULL,NULL);
