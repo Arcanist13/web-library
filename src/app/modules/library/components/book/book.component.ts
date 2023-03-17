@@ -25,6 +25,7 @@ export class BookComponent {
   public formInvalid = false;
   public submitText = '';
   public editing: boolean;
+  public newBook: boolean;
   public data?: IBook;
   public loggedIn: boolean;
   private _originalImages: Array<string | undefined>;
@@ -45,6 +46,7 @@ export class BookComponent {
     private _snackService: SnackService,
   ) {
     this.editing = this._libraryService.editing;
+    this.newBook = this._libraryService.newBook;
     this.data = this._libraryService.selectedBook;
     this._originalImages = [];
 
@@ -62,7 +64,7 @@ export class BookComponent {
     );
 
     // Check mode and redirect on invalid mode
-    if ((!this.editing && !this.data) || (this.editing && !this.loggedIn)) {
+    if (((!this.editing && !this.data) || (this.editing && !this.loggedIn)) && !this.newBook) {
       this._snackService.openInfoSnack('Failed to load book data.');
       this._router.navigate([`/${HOME_PATH}`]);
     }
@@ -75,6 +77,23 @@ export class BookComponent {
           this.data.image_full = image.image_full;
         }
       });
+    }
+
+    // Set default book values for creating a new book
+    if (this.newBook) {
+      this.data = {
+        name: '',
+        authour: '',
+        genres: undefined,
+        series_name: undefined,
+        series_number: undefined,
+        series_total: undefined,
+        notes: undefined,
+        damaged: 0,
+        inconsistent: 0,
+        image_full: undefined,
+        image_icon: undefined
+      } as IBook;
     }
 
     // Initialise the form with known data
@@ -167,7 +186,7 @@ export class BookComponent {
           inconsistent: inconsistent ? +inconsistent : undefined,
         } as (IBook);
 
-        if (this.editing && this.data) {
+        if ((this.editing && this.data) && !this.newBook) {
           this._libraryService.updateBook(book);
         } else {
           this._libraryService.createBook(book);
@@ -217,6 +236,10 @@ export class BookComponent {
    * Close the editing page
    */
   public close(): void {
+    if (this.newBook) {
+      this._router.navigate([`/${HOME_PATH}`]);
+      return;
+    }
     this.editing = false;
     if (this.data) {
       this.data.image_full = this._originalImages[0];
@@ -257,6 +280,7 @@ export class BookComponent {
       dialogRef.afterClosed().subscribe((res: boolean) => {
         if (res) {
           this._libraryService.deleteBook(id, name);
+          this._router.navigate([`/${HOME_PATH}`]);
         }
       });
     } else {
@@ -288,8 +312,11 @@ export class BookComponent {
   public removeGenre(genre: string): void {
     if (this.data) {
       this.data.genres = this.data.genres?.replace(genre, '').replace('//', '/');
-      if (this.data.genres?.split('/')[1] === '') {
+      if (this.data.genres?.split('/')[0] === '' || this.data.genres?.split('/')[1] === '') {
         this.data.genres = this.data.genres.replace('/', '');
+      }
+      if (this.data.genres === '') {
+        this.data.genres = undefined;
       }
     }
   }
@@ -301,7 +328,7 @@ export class BookComponent {
    */
   public selectGenre(event: MatAutocompleteSelectedEvent): void {
     if (this.data) {
-      this.data.genres = `${this.data.genres}${this.data.genres ? '/' : ''}${event.option.viewValue}`;
+      this.data.genres = `${this.data.genres ?? ''}${this.data.genres ? '/' : ''}${event.option.viewValue}`;
     }
     // this.fruitInput.nativeElement.value = '';
     this.form.get('genres')?.setValue(null);
@@ -333,6 +360,7 @@ export class BookComponent {
    */
   public getHeaderText(): string {
     if (!this.editing && this.data) return this.data.name;
-    return this.data ? `Editing ${this.data.name}` : 'Add New Book';
+    if (this.newBook) return 'Add New Book';
+    return `Editing ${this.data?.name}`;
   }
 }

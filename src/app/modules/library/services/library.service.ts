@@ -20,6 +20,7 @@ export class LibraryService {
 
   private _selectedBook: IBook | undefined;
   private _editing: boolean;
+  private _newBook: boolean;
 
   private _onBooksLoaded: BehaviorSubject<Array<IBook>> = new BehaviorSubject<Array<IBook>>([]);
 
@@ -32,16 +33,17 @@ export class LibraryService {
   ) {
     this._selectedBook = undefined;
     this._editing = false;
+    this._newBook = false;
 
     // Load the library books
     this._httpService.get<Array<IBook>>(`${environment.backendUri}/books`).subscribe({
-      next: (books: Array<IBook>) => {
+      next: (books: Array<IBook> = []) => {
         this._books = books;
         this._onBooksLoaded.next(this._books);
 
         // Load the library icons
         this._httpService.get<Array<IBookIcon>>(`${environment.backendUri}/icons`).subscribe({
-          next: (icons: Array<IBookIcon>) => {
+          next: (icons: Array<IBookIcon> = []) => {
             icons.forEach((icon: IBookIcon) => this._books[icon.id - 1].image_icon = icon.image_icon);
           },
           error: () => { this._snackService.openInfoSnack('Failed to fetch books from the backend.'); }
@@ -92,6 +94,7 @@ export class LibraryService {
 
           this._router.navigate([`/${HOME_PATH}`]);
           this._editing = false;
+          this._newBook = false;
           this._selectedBook = undefined;
         },
         error: () => { this._snackService.openInfoSnack('Failed to create the new book.'); }
@@ -107,9 +110,10 @@ export class LibraryService {
    * @param book  book to view/edit
    * @param edit  toggle for editing mode
    */
-  public viewBook(book: IBook | undefined, edit = false): void {
+  public viewBook(book: IBook | undefined, edit = false, newBook = false): void {
     this._selectedBook = book;
     this._editing = edit;
+    this._newBook = newBook;
     this._router.navigate(['/library/book']);
   }
 
@@ -130,6 +134,7 @@ export class LibraryService {
 
           this._router.navigate([`/${HOME_PATH}`]);
           this._editing = false;
+          this._newBook = false;
           this._selectedBook = undefined;
         },
         error: () => { this._snackService.openInfoSnack('Failed to edit the book.'); }
@@ -170,7 +175,7 @@ export class LibraryService {
     return new Promise((resolve, reject) => {
       const formData = new FormData();
       formData.append('image', file, file.name);
-      this._httpService.post<IBookImageProcessed>(`${environment.backendUri}/book/image`, formData).subscribe({
+      this._httpService.post<IBookImageProcessed>(`${environment.backendUri}/book/genimage`, formData).subscribe({
         next: (images: IBookImageProcessed) => {
           resolve(images);
         },
@@ -301,6 +306,19 @@ export class LibraryService {
    */
   public set editing(value: boolean) {
     this._editing = value;
+  }
+
+  /**
+   * Get the current new book status
+   */
+  public get newBook() : boolean {
+    return this._newBook;
+  }
+  /**
+   * Set the new book status
+   */
+  public set newBook(value: boolean) {
+    this._newBook = value;
   }
 
   /**

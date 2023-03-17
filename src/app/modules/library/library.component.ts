@@ -130,7 +130,7 @@ export class LibraryComponent {
    * Create a book
    */
   public createBook(): void {
-    this._libraryService.viewBook(undefined, true);
+    this._libraryService.viewBook(undefined, true, true);
   }
 
   /**

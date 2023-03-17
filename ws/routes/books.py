@@ -18,13 +18,26 @@ imageProcessing = ImageProcessing()
 async def get_all_books():
   '''Get all books'''
   books = get_db_all("SELECT id, name, authour, genres, series_name, series_number, series_total, notes, damaged, inconsistent FROM books ORDER BY id ASC")
-  return books
+  return books or []
 
 @router.get('/icons', response_model=Optional[List[BookIcon]], tags=["book"])
 async def get_all_icons():
   '''Get all icons.'''
   icons = get_db_all("SELECT id, image_icon FROM books ORDER BY id ASC")
-  return icons
+  return icons or []
+
+@router.post("/book/genimage", tags=["book"])
+async def process_image(image: UploadFile, user: User = Depends(get_current_user)):
+  '''Process the images and return the full image and icon'''
+  if image is not None and user is not None:
+    try:
+      (img, ico) = imageProcessing.process_image(image.file.read(), 400, 60)
+      if img is not None and ico is not None:
+        return {"image_full": img, "image_icon": ico}
+      raise HTTPException(status_code=500, detail='Image processing did not return a result')
+    except:
+      raise HTTPException(status_code=500, detail='Image processing failed')
+  raise HTTPException(status_code=500, detail='Unauthorised')
 
 @router.get('/book/image/{book_id}', response_model=Optional[BookImage], tags=["book"])
 async def get_book(book_id: int):
@@ -67,22 +80,10 @@ async def add_book(book: NewBook, user: User = Depends(get_current_user)):
       INSERT INTO books
         (name, authour, genres, series_name, series_number, series_total, image_full, image_icon, notes, damaged, inconsistent)
       VALUES
-        (?, ?, ?, ?, ?, ?, ?, ?)
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     ''', [
       book.name, book.authour, book.genres, book.series_name, book.series_number, book.series_total, book.image_full, book.image_icon, book.notes, book.damaged, book.inconsistent
     ])
   else:
     raise HTTPException(status_code=500, detail='Cannot add book')
   return get_db_one('SELECT * FROM books ORDER BY id DESC LIMIT 1')
-
-@router.post("/book/image", tags=["book"])
-async def process_image(image: UploadFile, user: User = Depends(get_current_user)):
-  '''Process the images and return the full image and icon'''
-  if image is not None and user is not None:
-    try:
-      (img, ico) = imageProcessing.process_image(image.file.read(), 400, 60)
-      if img is not None and ico is not None:
-        return {"image_full": img, "image_icon": ico}
-      raise HTTPException(status_code=500, detail='Image processing did not return a result')
-    except:
-      raise HTTPException(status_code=500, detail='Image processing failed')
