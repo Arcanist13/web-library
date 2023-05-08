@@ -68,6 +68,10 @@ async def edit_book(book_id: int, book: NewBook, user: User = Depends(get_curren
       name = ?, authour = ?, genres = ?, series_name = ?, series_number = ?, series_total = ?, image_full = ?, image_icon = ?, notes = ?, damaged = ?, inconsistent = ?
       WHERE id = ?
     ''', [book.name, book.authour, book.genres, book.series_name, book.series_number, book.series_total, book.image_full, book.image_icon, book.notes, book.damaged, book.inconsistent, book_id])
+
+    # Update series totals
+    if book.series_name is not None and book.series_name != "":
+      execute('UPDATE books SET series_total = ? WHERE series_name = ?', [book.series_total, book.series_name])
     return get_db_one('SELECT * FROM books WHERE id = ?', [book_id])
   else:
     raise HTTPException(status_code=500, detail='Failed to modify a book')
@@ -84,6 +88,10 @@ async def add_book(book: NewBook, user: User = Depends(get_current_user)):
     ''', [
       book.name, book.authour, book.genres, book.series_name, book.series_number, book.series_total, book.image_full, book.image_icon, book.notes, book.damaged, book.inconsistent
     ])
+
+    # Update series totals
+    if book.series_name is not None and book.series_name != "":
+      execute('UPDATE books SET series_total = ? WHERE series_name = ?', [book.series_total, book.series_name])
   else:
     raise HTTPException(status_code=500, detail='Cannot add book')
   return get_db_one('SELECT * FROM books ORDER BY id DESC LIMIT 1')

@@ -30,6 +30,9 @@ export class BookComponent {
   public loggedIn: boolean;
   private _originalImages: Array<string | undefined>;
 
+  private _createAnother = false;
+  private _keepDetails = false;
+
   public filteredAuthours: Observable<Array<string>>;
   public filteredGenres: Observable<Array<string>>;
   public filteredSeries: Observable<Array<string>>;
@@ -114,6 +117,8 @@ export class BookComponent {
         notes: new FormControl(this.data?.notes, []),
         damaged: new FormControl(this.data?.damaged, []),
         inconsistent: new FormControl(this.data?.inconsistent, []),
+        create_another: new FormControl(this._createAnother, []),
+        keep_details: new FormControl(this._keepDetails, []),
       }
     );
 
@@ -171,6 +176,9 @@ export class BookComponent {
         const damaged = this.form.get('damaged')?.value;
         const inconsistent = this.form.get('inconsistent')?.value;
 
+        const formCreateAnother = this.form.get('create_another')?.value;
+        const formKeepDetails = this.form.get('keep_details')?.value;
+
         const book = {
           id: this.data ? this.data.id : undefined,
           name: name ? name : '',
@@ -186,10 +194,28 @@ export class BookComponent {
           inconsistent: inconsistent ? +inconsistent : undefined,
         } as (IBook);
 
+        // Reset form if required
+        if (formCreateAnother && !formKeepDetails) {
+          this.form.reset();
+          this.form.get('create_another')?.setValue(true);
+        }
+        if (formCreateAnother && formKeepDetails) {
+          this.form.get('name')?.reset();
+          this.form.get('series_number')?.reset();
+          this.form.get('notes')?.reset();
+          this.form.get('damaged')?.reset();
+          this.form.get('inconsistent')?.reset();
+
+          if (this.data) {
+            this.data.image_full = undefined;
+            this.data.image_icon = undefined;
+          }
+        }
+
         if ((this.editing && this.data) && !this.newBook) {
-          this._libraryService.updateBook(book);
+          this._libraryService.updateBook(book, !formCreateAnother);
         } else {
-          this._libraryService.createBook(book);
+          this._libraryService.createBook(book, !formCreateAnother);
         }
       } catch (err) {
         this.formInvalid = true;
@@ -295,9 +321,9 @@ export class BookComponent {
    */
   public addGenre(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
-    // Add our fruit
+    // Add our value as a chip
     if (value && this.data) {
-      this.data.genres = `${this.data.genres}${this.data.genres ? '/' : ''}${value}`;
+      this.data.genres = `${this.data.genres ?? ''}${this.data.genres ? '/' : ''}${value}`;
     }
     // Clear the input value
     event.chipInput.clear();
@@ -311,10 +337,8 @@ export class BookComponent {
    */
   public removeGenre(genre: string): void {
     if (this.data) {
-      this.data.genres = this.data.genres?.replace(genre, '').replace('//', '/');
-      if (this.data.genres?.split('/')[0] === '' || this.data.genres?.split('/')[1] === '') {
-        this.data.genres = this.data.genres.replace('/', '');
-      }
+      const saved = this.data.genres?.split('/').filter((gen: string) => gen !== genre);
+      this.data.genres = saved?.join('/');
       if (this.data.genres === '') {
         this.data.genres = undefined;
       }
@@ -331,7 +355,7 @@ export class BookComponent {
       this.data.genres = `${this.data.genres ?? ''}${this.data.genres ? '/' : ''}${event.option.viewValue}`;
     }
     // this.fruitInput.nativeElement.value = '';
-    this.form.get('genres')?.setValue(null);
+    this.form.get('genres')?.setValue('');
   }
 
   /**

@@ -83,7 +83,7 @@ export class LibraryService {
    *
    * @param details new book details
    */
-  public createBook(details: IBook): void {
+  public createBook(details: IBook, redirect = true): void {
     if (this._userService.onLoginStateUpdate.value) {
       this._httpService.post<IBook>(`${environment.backendUri}/book/add`, details).subscribe({
         next: (newBook: IBook) => {
@@ -91,11 +91,15 @@ export class LibraryService {
 
           // Update the list
           this._books.push(newBook);
+          this._updateBookInfoLists(details);
+          this._updateBookSeriesTotals(details);
 
-          this._router.navigate([`/${HOME_PATH}`]);
-          this._editing = false;
-          this._newBook = false;
-          this._selectedBook = undefined;
+          if (redirect) {
+            this._router.navigate([`/${HOME_PATH}`]);
+            this._editing = false;
+            this._newBook = false;
+            this._selectedBook = undefined;
+          }
         },
         error: () => { this._snackService.openInfoSnack('Failed to create the new book.'); }
       });
@@ -122,7 +126,7 @@ export class LibraryService {
    *
    * @param details new book details
    */
-  public updateBook(details: IBook): void {
+  public updateBook(details: IBook, redirect = true): void {
     if (this._userService.onLoginStateUpdate.value) {
       this._httpService.post<IBook>(`${environment.backendUri}/book/edit/${details.id}`, details).subscribe({
         next: (newBook: IBook) => {
@@ -131,17 +135,48 @@ export class LibraryService {
           // Update the list
           const foundIdx = this._books.findIndex((b) => b.id === details.id);
           if (foundIdx !== -1) this._books[foundIdx] = details;
+          this._updateBookInfoLists(details);
+          this._updateBookSeriesTotals(details);
 
-          this._router.navigate([`/${HOME_PATH}`]);
-          this._editing = false;
-          this._newBook = false;
-          this._selectedBook = undefined;
+          if (redirect) {
+            this._router.navigate([`/${HOME_PATH}`]);
+            this._editing = false;
+            this._newBook = false;
+            this._selectedBook = undefined;
+          }
         },
         error: () => { this._snackService.openInfoSnack('Failed to edit the book.'); }
       });
     } else {
       this._snackService.openInfoSnack('Must be logged in to update a book.');
     }
+  }
+
+  /**
+   * Update the memory lists of book information for future repopulation
+   *
+   * @param details book details
+   */
+  private _updateBookInfoLists(details: IBook): void {
+    const auths = details.authour.split(',');
+    auths.forEach((auth: string) => {
+      if (!this._authours.includes(auth.trim())) { this._authours.push(auth.trim()); }
+    });
+
+    if (details.series_name && !this._series.includes(details.series_name)) {
+      this._series.push(details.series_name);
+    }
+  }
+
+  /**
+   * Update stored book series totals to match if changed
+   *
+   * @param details book information
+   */
+  private _updateBookSeriesTotals(details: IBook): void {
+    this._books.forEach((book: IBook) => {
+      if (book.series_name === details.series_name) { book.series_total = details.series_total; }
+    });
   }
 
   /**

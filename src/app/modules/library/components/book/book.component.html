@@ -93,19 +93,6 @@
           autocomplete="off"></textarea>
       </mat-form-field>
 
-      <!-- Book Status -->
-      <section class="mb-1">
-        <mat-checkbox matInput formControlName="damaged" color="warn">Damaged</mat-checkbox>
-        <mat-checkbox matInput formControlName="inconsistent" color="warn">Inconsistent</mat-checkbox>
-      </section>
-
-      <!-- Submit buttons -->
-      <div>
-        <button type="button" *ngIf="editing || newBook" mat-raised-button color="basic" (click)="close()"
-          class="me-2">Cancel</button>
-        <button *ngIf="editing || newBook" mat-raised-button color="general" type="submit">{{ getSubmitText() }}</button>
-      </div>
-
       <!-- Image area -->
       <div class="mt-3">
         <div class="fit-content d-flex align-items-center justify-content-center" *ngIf="(!!data?.image_full)">
@@ -127,6 +114,25 @@
           <ngx-dropzone-label>No cover image, add new.</ngx-dropzone-label>
         </ngx-dropzone>
       </div>
+
+      <!-- Book Status -->
+      <section class="my-1">
+        <mat-checkbox matInput formControlName="damaged" color="warn">Damaged</mat-checkbox>
+        <mat-checkbox matInput formControlName="inconsistent" color="warn">Inconsistent</mat-checkbox>
+      </section>
+
+      <!-- Submit buttons -->
+      <div>
+        <button type="button" *ngIf="editing || newBook" mat-raised-button color="basic" (click)="close()"
+          class="me-2">Cancel</button>
+        <button *ngIf="editing || newBook" mat-raised-button color="general" type="submit">{{ getSubmitText() }}</button>
+      </div>
+
+      <!-- Create another options -->
+      <section class="my-1">
+        <mat-checkbox matInput formControlName="create_another" color="warn">Create Another</mat-checkbox>
+        <mat-checkbox matInput formControlName="keep_details" color="warn">Keep Details</mat-checkbox>
+      </section>
     </form>
   </mat-card-content>
 </mat-card>
