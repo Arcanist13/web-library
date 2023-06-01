@@ -129,7 +129,7 @@
       </div>
 
       <!-- Create another options -->
-      <section class="my-1">
+      <section *ngIf="editing || newBook" class="my-1">
         <mat-checkbox matInput formControlName="create_another" color="warn">Create Another</mat-checkbox>
         <mat-checkbox matInput formControlName="keep_details" color="warn">Keep Details</mat-checkbox>
       </section>

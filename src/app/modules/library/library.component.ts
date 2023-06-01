@@ -105,7 +105,7 @@ export class LibraryComponent {
    */
   public get books(): Array<IBook> {
     const startIdx = this.pageIndex * this.pageSize;
-    const endIdx = (startIdx + this.pageSize) - 1;
+    const endIdx = startIdx + this.pageSize;
     return this._bookList.slice(startIdx, endIdx);
   }
 

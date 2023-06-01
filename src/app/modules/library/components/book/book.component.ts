@@ -199,17 +199,18 @@ export class BookComponent {
           this.form.reset();
           this.form.get('create_another')?.setValue(true);
         }
+
         if (formCreateAnother && formKeepDetails) {
           this.form.get('name')?.reset();
           this.form.get('series_number')?.reset();
           this.form.get('notes')?.reset();
           this.form.get('damaged')?.reset();
           this.form.get('inconsistent')?.reset();
+        }
 
-          if (this.data) {
-            this.data.image_full = undefined;
-            this.data.image_icon = undefined;
-          }
+        if (this.data) {
+          this.data.image_full = undefined;
+          this.data.image_icon = undefined;
         }
 
         if ((this.editing && this.data) && !this.newBook) {
