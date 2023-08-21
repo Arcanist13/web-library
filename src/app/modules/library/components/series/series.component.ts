@@ -68,7 +68,7 @@ export class SeriesComponent {
    * @param name  series name
    */
   public viewSeries(name: string): void {
-    this._filterService.bookFilter = name;
+    this._filterService.bookFilter = `series:${name}`;
     localStorage.setItem(STORAGE_KEY_BOOKS_PAGE_INDEX, (0).toString());
     this._router.navigate([`/${HOME_PATH}`]);
   }
