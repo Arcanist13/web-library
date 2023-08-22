@@ -20,10 +20,11 @@ async def get_all_books():
   books = get_db_all("SELECT id, name, authour, genres, series_name, series_number, series_total, notes, damaged, inconsistent FROM books ORDER BY id ASC")
   return books or []
 
-@router.get('/icons', response_model=Optional[List[BookIcon]], tags=["book"])
-async def get_all_icons():
-  '''Get all icons.'''
-  icons = get_db_all("SELECT id, image_icon FROM books ORDER BY id ASC")
+@router.post("/iconset", response_model=Optional[List[BookIcon]], tags=["book"])
+async def get_icon_set(ids: List[int]):
+  '''Get a set of icons defined by a list of ids'''
+  idFiller = ("?,"*len(ids))[:-1]
+  icons = get_db_all("SELECT id, image_icon FROM books WHERE id IN ("+idFiller+") AND image_icon IS NOT NULL ORDER BY id ASC", ids)
   return icons or []
 
 @router.post("/book/genimage", tags=["book"])

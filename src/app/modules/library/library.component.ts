@@ -46,6 +46,9 @@ export class LibraryComponent {
       () => {
         this._bookList = this._filterService.filterBooks(this._libraryService.books);
         this.length = this._bookList.length;
+
+        // After initial load fetch icons
+        this.fetchPageIcons();
       }
     );
 
@@ -86,6 +89,17 @@ export class LibraryComponent {
     localStorage.setItem(STORAGE_KEY_BOOKS_PAGE_SIZE, this.pageSize.toString());
     this.pageIndex = e.pageIndex;
     localStorage.setItem(STORAGE_KEY_BOOKS_PAGE_INDEX, this.pageIndex.toString());
+
+    // After page events fetch icons
+    this.fetchPageIcons();
+  }
+
+  /**
+   * Request icon load for the icons in the current display page
+   */
+  fetchPageIcons(): void {
+    const ids = this.books.map((book: IBook) => book.id);
+    this._libraryService.getBookIcons(ids);
   }
 
   /**
@@ -163,6 +177,9 @@ export class LibraryComponent {
     this.length = this._bookList.length;
     this.pageIndex = 0;
     localStorage.setItem(STORAGE_KEY_BOOKS_PAGE_INDEX, this.pageIndex.toString());
+
+    // Fetch icons on search change
+    this.fetchPageIcons();
   }
 
   /**

@@ -40,14 +40,6 @@ export class LibraryService {
       next: (books: Array<IBook> = []) => {
         this._books = books;
         this._onBooksLoaded.next(this._books);
-
-        // Load the library icons
-        this._httpService.get<Array<IBookIcon>>(`${environment.backendUri}/icons`).subscribe({
-          next: (icons: Array<IBookIcon> = []) => {
-            icons.forEach((icon: IBookIcon) => this._books[icon.id - 1].image_icon = icon.image_icon);
-          },
-          error: () => { this._snackService.openInfoSnack('Failed to fetch books from the backend.'); }
-        });
       },
       error: () => { this._snackService.openInfoSnack('Failed to fetch books from the backend.'); }
     });
@@ -73,6 +65,34 @@ export class LibraryService {
         error: () => {
           this._snackService.openInfoSnack('Failed to get a book.');
           reject();
+        }
+      });
+    });
+  }
+
+  /**
+   * Get the icons for the specified IDs
+   *
+   * @param ids book IDs
+   * @returns   request result
+   */
+  public getBookIcons(ids: Array<number>): Promise<boolean> {
+    return new Promise((resolve) => {
+      // Don't request existing icons
+      const sendIds: Array<number> = [];
+      ids.forEach((id: number) => {
+        if (!this._books[id - 1].image_icon) sendIds.push(id);
+      });
+
+      // Get the list of icons
+      this._httpService.post<Array<IBookIcon>>(`${environment.backendUri}/iconset`, sendIds).subscribe({
+        next: (icons: Array<IBookIcon> = []) => {
+          icons.forEach((icon: IBookIcon) => this._books[icon.id - 1].image_icon = icon.image_icon);
+          resolve(true);
+        },
+        error: () => {
+          this._snackService.openInfoSnack('Failed to get a book icons.');
+          resolve(false);
         }
       });
     });
@@ -346,7 +366,7 @@ export class LibraryService {
   /**
    * Get the current new book status
    */
-  public get newBook() : boolean {
+  public get newBook(): boolean {
     return this._newBook;
   }
   /**
