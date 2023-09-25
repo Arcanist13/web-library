@@ -81,20 +81,26 @@ export class LibraryService {
       // Don't request existing icons
       const sendIds: Array<number> = [];
       ids.forEach((id: number) => {
-        if (!this._books[id - 1].image_icon) sendIds.push(id);
+        const idx = this._books.findIndex((book: IBook) => book.id === id);
+        if (idx !== -1 && !this._books[idx].image_icon) sendIds.push(id);
       });
 
       // Get the list of icons
-      this._httpService.post<Array<IBookIcon>>(`${environment.backendUri}/iconset`, sendIds).subscribe({
-        next: (icons: Array<IBookIcon> = []) => {
-          icons.forEach((icon: IBookIcon) => this._books[icon.id - 1].image_icon = icon.image_icon);
-          resolve(true);
-        },
-        error: () => {
-          this._snackService.openInfoSnack('Failed to get a book icons.');
-          resolve(false);
-        }
-      });
+      if (sendIds.length > 0) {
+        this._httpService.post<Array<IBookIcon>>(`${environment.backendUri}/iconset`, sendIds).subscribe({
+          next: (icons: Array<IBookIcon> = []) => {
+            icons.forEach((icon: IBookIcon) => {
+              const idx = this._books.findIndex((book: IBook) => book.id === icon.id);
+              if (idx !== -1) this._books[idx].image_icon = icon.image_icon;
+            });
+            resolve(true);
+          },
+          error: () => {
+            this._snackService.openInfoSnack('Failed to get a book icons.');
+            resolve(false);
+          }
+        });
+      }
     });
   }
 
